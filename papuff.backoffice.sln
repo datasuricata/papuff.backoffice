@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "papuff.backoffice", "papuff.backoffice.csproj", "{E8E45334-B806-4A5C-958F-40D2E9CBD259}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E8E45334-B806-4A5C-958F-40D2E9CBD259}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8E45334-B806-4A5C-958F-40D2E9CBD259}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8E45334-B806-4A5C-958F-40D2E9CBD259}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8E45334-B806-4A5C-958F-40D2E9CBD259}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B68617DB-8FDB-4EA1-B08D-8AE54830C434}
+	EndGlobalSection
+EndGlobal
