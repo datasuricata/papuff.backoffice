@@ -1,0 +1,17 @@
+﻿@{ Layout = null; }
+
+<div class="card">
+    <div class="card-header">
+        <h4>Navegar</h4>
+    </div>
+    <div class="card-body">
+        <ul class="nav nav-pills flex-column">
+            <li class="nav-item"><a asp-controller="User" asp-action="Profile" class="nav-link @ViewBag.Perfil">Perfil</a></li>
+            <li class="nav-item"><a asp-controller="User" asp-action="General" class="nav-link @ViewBag.General">Geral</a></li>
+            <li class="nav-item"><a asp-controller="User" asp-action="Address" class="nav-link @ViewBag.Endereço">Endereço</a></li>
+            <li class="nav-item"><a asp-controller="User" asp-action="Documents" class="nav-link @ViewBag.Documentos">Documentos</a></li>
+            <li class="nav-item"><a asp-controller="User" asp-action="Wallets" class="nav-link @ViewBag.Carteiras">Carteiras</a></li>
+            <li class="nav-item"><a asp-controller="User" asp-action="Companies" class="nav-link @ViewBag.Empresas">Empresas</a></li>
+        </ul>
+    </div>
+</div>

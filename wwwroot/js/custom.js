@@ -9,10 +9,14 @@
 
 //FormOnFail
 function FormOnFail(error) {
+
+    var response = error.responseText.replace(/"/gm, "").replace(/#/gm, "\n");
+    console.log(response);
+
     if (error.status === 500) {
-        swal("Erro", error.responseText, "error");
+        swal("Erro", response, "error");
     }
     if (error.status === 400) {
-        swal("Atenção", error.responseText, "info");
+        swal("Atenção", response, "info");
     }
 }

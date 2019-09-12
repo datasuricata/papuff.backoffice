@@ -26,12 +26,19 @@ gulp.task('js', function () {
         './node_modules/nicescroll/dist/jquery.nicescroll.min.js',
         './node_modules/moment/min/moment.min.js',
         './node_modules/sweetalert/dist/sweetalert.min.js',
+        './node_modules/jquery-validation/dist/jquery.validate.min.js',
+        './node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js',
+        './node_modules/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.min.js',
         './assets/js/stisla.js',
         './assets/js/scripts.js',
         './assets/js/custom.js',
     ])
     //    .pipe(ngAnnotate())
+<<<<<<< HEAD
     //    .pipe(jsuglify())
+=======
+  //      .pipe(jsuglify())
+>>>>>>> 2b9c57c175f3f54f89bbb9ccf768518fefdd6fd1
         .pipe(gulp.dest('wwwroot/js'));
     // .pipe(browserSync.stream());
 });

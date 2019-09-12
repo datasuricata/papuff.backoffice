@@ -14,7 +14,27 @@ namespace papuff.backoffice.Controllers {
             return View(user);
         }
 
-        public IActionResult Create() {
+        public IActionResult Profile() {
+            return View();
+        }
+
+        public IActionResult General() {
+            return View();
+        }
+
+        public IActionResult Address() {
+            return View();
+        }
+
+        public IActionResult Wallets() {
+            return View();
+        }
+
+        public IActionResult Companies() {
+            return View();
+        }
+
+        public IActionResult Documents() {
             return View();
         }
     }

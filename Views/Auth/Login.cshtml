@@ -10,17 +10,13 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <title>Login &mdash; Papuff</title>
-
-    <!-- <link rel="stylesheet" href="~/css/site.min.css" /> -->
-    <!-- General CSS Files -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
           asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
           crossorigin="anonymous"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css">
-    <!-- Plugins -->
-    <!-- Template CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.css" />
     <link rel="stylesheet" href="~/css/style.css">
     <link rel="stylesheet" href="~/css/components.css">
 </head>
@@ -34,39 +30,37 @@
                         <div class="login-brand">
                             <img src="../assets/img/stisla-fill.svg" alt="logo" width="100" class="shadow-light rounded-circle">
                         </div>
-
                         <div class="card card-primary">
                             <div class="card-header"><h4>Login</h4></div>
-
                             <div class="card-body">
-                                <form method="POST" asp-action="Login" asp-controller="Auth" class="needs-validation" novalidate="">
+                                <form asp-action="Login" asp-controller="Auth" asp-anti-forgery class="needs-validation" novalidate="" data-ajax="true" data-ajax-method="POST" data-ajax-failure="FormOnFail" data-ajax-success="window.location = '.././'">
                                     <div class="form-group">
-                                        <label for="email">Email</label>
-                                        <input id="email" type="email" class="form-control" asp-for="Login" tabindex="1" required autofocus>
+                                        <label for="login">Login</label>
+                                        <input id="login" type="text" class="form-control" asp-for="Login" tabindex="1" required autofocus>
                                         <div class="invalid-feedback">
-                                            Please fill in your email
+                                            entre com seu login
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <div class="d-block">
-                                            <label for="password" class="control-label">Password</label>
+                                            <label for="password" class="control-label">Senha</label>
                                             <div class="float-right">
                                                 <a href="auth-forgot-password.html" class="text-small">
-                                                    Forgot Password?
+                                                    Esqueceu a senha?
                                                 </a>
                                             </div>
                                         </div>
                                         <input id="password" type="password" class="form-control" asp-for="Password" tabindex="2" required>
                                         <div class="invalid-feedback">
-                                            please fill in your password
+                                            entre com sua senha
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me">
-                                            <label class="custom-control-label" for="remember-me">Remember Me</label>
+                                            <label class="custom-control-label" for="remember-me">Lembrar</label>
                                         </div>
                                     </div>
 
@@ -86,16 +80,15 @@
                                         </a>
                                     </div>
                                     <div class="col-6">
-                                        <a class="btn btn-block btn-social btn-twitter">
-                                            <span class="fab fa-twitter"></span> Twitter
+                                        <a class="btn btn-block btn-social btn-google">
+                                            <span class="fab fa-google"></span> Gmail
                                         </a>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                         <div class="simple-footer">
-                            Copyright &copy; Stisla @DateTime.Now.Year
+                            Copyright &copy; Papuff @DateTime.Now.Year
                         </div>
                     </div>
                 </div>
@@ -103,18 +96,16 @@
         </section>
     </div>
 
-    <!-- General JS Scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    
     <script src="../js/stisla.js"></script>
     <script src="../js/scripts.js"></script>
     <script src="../js/custom.js"></script>
 
-    <!-- Page Specific JS File -->
+    <partial name="_ValidationScriptsPartial" />
 </body>
 </html>
 

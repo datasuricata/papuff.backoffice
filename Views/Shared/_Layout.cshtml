@@ -1,22 +1,28 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+@using Microsoft.AspNetCore.Http.Extensions
+
+@{ 
+    var loggedTime = (int)(DateTime.Now - Convert.ToDateTime(User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.DateOfBirth).Value)).TotalMinutes;
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <title>@ViewData["Title"] - Papuff BackOffice</title>
-    
+
     <!-- <link rel="stylesheet" href="~/css/site.min.css" /> -->
-
-        <!-- General CSS Files -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
-              crossorigin="anonymous"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css">
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+          asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+          crossorigin="anonymous"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css">
     <!-- Plugins -->
-
     <!-- Template CSS -->
     <link rel="stylesheet" href="~/css/style.css">
     <link rel="stylesheet" href="~/css/components.css">
@@ -41,71 +47,51 @@
                         <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
                         <div class="dropdown-menu dropdown-list dropdown-menu-right">
                             <div class="dropdown-header">
-                                Notifications
-                                <div class="float-right">
-                                    <a href="#">Mark All As Read</a>
-                                </div>
+                                Notificações
                             </div>
                             <div class="dropdown-list-content">
                                 <a href="#" class="dropdown-item dropdown-item-unread">
-                                    <img alt="image" src="../dist/img/avatar/avatar-1.png" class="rounded-circle dropdown-item-img">
                                     <div class="dropdown-item-desc">
                                         <b>Kusnaedi</b> has moved task <b>Fix bug header</b> to <b>Done</b>
                                         <div class="time">10 Hours Ago</div>
                                     </div>
                                 </a>
                                 <a href="#" class="dropdown-item dropdown-item-unread">
-                                    <img alt="image" src="../dist/img/avatar/avatar-2.png" class="rounded-circle dropdown-item-img">
                                     <div class="dropdown-item-desc">
                                         <b>Ujang Maman</b> has moved task <b>Fix bug footer</b> to <b>Progress</b>
                                         <div class="time">12 Hours Ago</div>
                                     </div>
                                 </a>
                                 <a href="#" class="dropdown-item dropdown-item-unread">
-                                    <img alt="image" src="../dist/img/avatar/avatar-3.png" class="rounded-circle dropdown-item-img">
                                     <div class="dropdown-item-desc">
                                         <b>Agung Ardiansyah</b> has moved task <b>Fix bug sidebar</b> to <b>Done</b>
                                         <div class="time">12 Hours Ago</div>
                                     </div>
                                 </a>
-                                <a href="#" class="dropdown-item">
-                                    <img alt="image" src="../dist/img/avatar/avatar-4.png" class="rounded-circle dropdown-item-img">
-                                    <div class="dropdown-item-desc">
-                                        <b>Ardian Rahardiansyah</b> has moved task <b>Fix bug navbar</b> to <b>Done</b>
-                                        <div class="time">16 Hours Ago</div>
-                                    </div>
-                                </a>
-                                <a href="#" class="dropdown-item">
-                                    <img alt="image" src="../dist/img/avatar/avatar-5.png" class="rounded-circle dropdown-item-img">
-                                    <div class="dropdown-item-desc">
-                                        <b>Alfa Zulkarnain</b> has moved task <b>Add logo</b> to <b>Done</b>
-                                        <div class="time">Yesterday</div>
-                                    </div>
-                                </a>
                             </div>
                             <div class="dropdown-footer text-center">
-                                <a href="#">View All <i class="fas fa-chevron-right"></i></a>
+                                <a href="#">Ver Todos <i class="fas fa-chevron-right"></i></a>
                             </div>
                         </div>
                     </li>
                     <li class="dropdown">
                         <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                             <img alt="image" src="../dist/img/avatar/avatar-1.png" width="30" class="rounded-circle mr-1">
-                            <div class="d-sm-none d-lg-inline-block">Hi, Ujang Maman</div>
+                            <div class="d-sm-none d-lg-inline-block">@User.Identity.Name</div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <div class="dropdown-title">Logged in 5 min ago</div>
-                            <a href="features-profile.html" class="dropdown-item has-icon">
-                                <i class="far fa-user"></i> Profile
+                            <div class="dropdown-title">Logado á <b class="text-danger">@loggedTime</b> minutos</div>
+                            <a asp-controller="User" asp-action="Profile" class="dropdown-item has-icon">
+                                <i class="far fa-user"></i> Perfil
                             </a>
                             <a href="features-activities.html" class="dropdown-item has-icon">
-                                <i class="fas fa-bolt"></i> Activities
+                                <i class="fas fa-bolt"></i> Atividades
                             </a>
                             <a href="features-settings.html" class="dropdown-item has-icon">
-                                <i class="fas fa-cog"></i> Settings
+                                <i class="fas fa-cog"></i> Configurações
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item has-icon text-danger">
+                            <a asp-controller="Auth" asp-route-returnUrl="@Context.Request.GetEncodedPathAndQuery()" asp-action="Logout" class="dropdown-item has-icon text-danger">
                                 <i class="fas fa-sign-out-alt"></i> Logout
                             </a>
                         </div>
@@ -115,7 +101,7 @@
             <div class="main-sidebar">
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
-                        <a href="index.html">Papuff</a>
+                        <a href=".././">Papuff</a>
                     </div>
                     <div class="sidebar-brand sidebar-brand-sm">
                         <a href="index.html">PP</a>
@@ -125,8 +111,7 @@
                         <li class="dropdown">
                             <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="dashboard-general.html">General Dashboard</a></li>
-                                <li><a class="nav-link" href="index.html">Ecommerce Dashboard</a></li>
+                                <li><a class="nav-link" asp-controller="Home" asp-action="Index">Padrão</a></li>
                             </ul>
                         </li>
                         <li class="menu-header">Starter</li>
@@ -139,31 +124,6 @@
                             </ul>
                         </li>
                         <li><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank Page</span></a></li>
-                        <li class="dropdown">
-                            <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Bootstrap</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="bootstrap-alert.html">Alert</a></li>
-                                <li><a class="nav-link" href="bootstrap-badge.html">Badge</a></li>
-                                <li><a class="nav-link" href="bootstrap-breadcrumb.html">Breadcrumb</a></li>
-                                <li><a class="nav-link" href="bootstrap-buttons.html">Buttons</a></li>
-                                <li><a class="nav-link" href="bootstrap-card.html">Card</a></li>
-                                <li><a class="nav-link" href="bootstrap-carousel.html">Carousel</a></li>
-                                <li><a class="nav-link" href="bootstrap-collapse.html">Collapse</a></li>
-                                <li><a class="nav-link" href="bootstrap-dropdown.html">Dropdown</a></li>
-                                <li><a class="nav-link" href="bootstrap-form.html">Form</a></li>
-                                <li><a class="nav-link" href="bootstrap-list-group.html">List Group</a></li>
-                                <li><a class="nav-link" href="bootstrap-media-object.html">Media Object</a></li>
-                                <li><a class="nav-link" href="bootstrap-modal.html">Modal</a></li>
-                                <li><a class="nav-link" href="bootstrap-nav.html">Nav</a></li>
-                                <li><a class="nav-link" href="bootstrap-navbar.html">Navbar</a></li>
-                                <li><a class="nav-link" href="bootstrap-pagination.html">Pagination</a></li>
-                                <li><a class="nav-link" href="bootstrap-popover.html">Popover</a></li>
-                                <li><a class="nav-link" href="bootstrap-progress.html">Progress</a></li>
-                                <li><a class="nav-link" href="bootstrap-table.html">Table</a></li>
-                                <li><a class="nav-link" href="bootstrap-tooltip.html">Tooltip</a></li>
-                                <li><a class="nav-link" href="bootstrap-typography.html">Typography</a></li>
-                            </ul>
-                        </li>
                     </ul>
                     <div class="p-3 mt-4 mb-4 hide-sidebar-mini">
                         <a href="documentation.html" class="btn btn-primary btn-lg btn-icon-split btn-block">
@@ -181,26 +141,14 @@
             </div>
             <footer class="main-footer">
                 <div class="footer-left">
-                    Copyright © 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad Nauval Azhar</a>
+                    Copyright © Papuff @DateTime.Now.Year <div class="bullet"></div>
                 </div>
                 <div class="footer-right">
-                    v2.0.0
+                    v1.0.0
                 </div>
             </footer>
         </div>
     </div>
-
-    <!-- <div class="container">
-        <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2019 - papuff.backoffice - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer> -->
 
     <script src="./js/jquery.min.js"></script>
     <script src="./js/popper.min.js"></script>
@@ -208,7 +156,6 @@
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/jquery.nicescroll.min.js"></script>
     <script src="./js/moment.min.js"></script>
-    <script src="./js/sweetalert.min.js"></script>
     <script src="./js/stisla.js"></script>
     <script src="./js/scripts.js"></script>
     <script src="./js/custom.js"></script>

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using papuff.backoffice.Startups.Kernel;
 
 namespace papuff.backoffice {
     public class Startup
@@ -54,6 +55,7 @@ namespace papuff.backoffice {
                 app.UseHsts();
             }
 
+            app.MiddleException();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();

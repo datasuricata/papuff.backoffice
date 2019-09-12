@@ -30,7 +30,7 @@ namespace papuff.backoffice.Services.Requests {
 
                 if (response.StatusCode == HttpStatusCode.BadRequest)
                     if (errors.Any())
-                        throw new Exception(string.Join($"<br/>", errors.Select(x => x.Value).ToArray()));
+                        throw new Exception(string.Join("#", errors.Select(x => x.Value).ToArray()));
             }
         }
 
