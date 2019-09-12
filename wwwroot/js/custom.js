@@ -6,3 +6,13 @@
  */
 
 "use strict";
+
+//FormOnFail
+function FormOnFail(error) {
+    if (error.status === 500) {
+        swal("Erro", error.responseText, "error");
+    }
+    if (error.status === 400) {
+        swal("Atenção", error.responseText, "info");
+    }
+}

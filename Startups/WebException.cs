@@ -15,9 +15,10 @@ namespace papuff.backoffice.Startups {
         }
 
         private static Task HandleExceptionAsync(HttpContext context, Exception exception) {
-            var _notify = context.RequestServices.GetService(typeof(IEventNotifier)) as IEventNotifier;
-            _notify.AddException<WebException>("Ops! Algo deu errado.", exception);
+            var _notify = context.RequestServices
+                .GetService(typeof(IEventNotifier)) as IEventNotifier;
 
+            _notify.AddException<WebException>("Ops! Algo deu errado.", exception);
             return context.Response.WriteAsync(JsonConvert.SerializeObject(exception));
         }
     }

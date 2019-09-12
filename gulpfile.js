@@ -3,8 +3,8 @@ var concat = require('gulp-concat');
 var cssmin = require('gulp-cssmin');
 var uncss = require('gulp-uncss');
 var browserSync = require('browser-sync').create;
-var ngAnnotate = require('gulp-ng-annotate');
-var jsuglify = require('gulp-uglify');
+//var ngAnnotate = require('gulp-ng-annotate');
+//var jsuglify = require('gulp-uglify');
 
 //var obfuscate = require('gulp-js-obfuscator');
 
@@ -30,8 +30,8 @@ gulp.task('js', function () {
         './assets/js/scripts.js',
         './assets/js/custom.js',
     ])
-        .pipe(ngAnnotate())
-        .pipe(jsuglify())
+    //    .pipe(ngAnnotate())
+    //    .pipe(jsuglify())
         .pipe(gulp.dest('wwwroot/js'));
     // .pipe(browserSync.stream());
 });
