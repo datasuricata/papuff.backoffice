@@ -25,6 +25,7 @@ gulp.task('js', function () {
         './node_modules/tooltip.js/dist/tooltip.min.js',
         './node_modules/nicescroll/dist/jquery.nicescroll.min.js',
         './node_modules/moment/min/moment.min.js',
+        './node_modules/sweetalert/dist/sweetalert.min.js',
         './assets/js/stisla.js',
         './assets/js/scripts.js',
         './assets/js/custom.js',
