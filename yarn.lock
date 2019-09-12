@@ -4941,6 +4941,13 @@ jpegtran-bin@^3.0.0:
     bin-wrapper "^3.0.0"
     logalot "^2.0.0"
 
+jquery-ajax-unobtrusive@^3.2.6:
+  version "3.2.6"
+  resolved "https://registry.yarnpkg.com/jquery-ajax-unobtrusive/-/jquery-ajax-unobtrusive-3.2.6.tgz#65bd140963011239b2eb679163f079428dea2278"
+  integrity sha512-95pv3c2Fo94qqzI3nBYFhcnwYlz673jutDa5yvADHv9KnWqQOoE8kZVV+nBASSBZF75XnGBl4EfPzOWFw2i9wQ==
+  dependencies:
+    jquery ">=1.8"
+
 "jquery-pwstrength@git+https://github.com/matoilic/jquery.pwstrength.git":
   version "0.0.0"
   resolved "git+https://github.com/matoilic/jquery.pwstrength.git#d6f07a13eba1479f481d0beceb612f439db406ae"
@@ -4955,6 +4962,19 @@ jquery-ui-dist@^1.12.1:
   resolved "https://registry.yarnpkg.com/jquery-ui-dist/-/jquery-ui-dist-1.12.1.tgz#5c0815d3cc6f90ff5faaf5b268a6e23b4ca904fa"
   integrity sha1-XAgV08xvkP9fqvWyaKbiO0ypBPo=
 
+jquery-validation-unobtrusive@^3.2.11:
+  version "3.2.11"
+  resolved "https://registry.yarnpkg.com/jquery-validation-unobtrusive/-/jquery-validation-unobtrusive-3.2.11.tgz#175ee46380385a0e33ed320f255fad321f68f9f5"
+  integrity sha512-3FQPllaWdD+Aq55zJLGSW39+eXPDz1HhwAvrSwYi8zHQ8DVcu5IJ1HVeTiCl0BnCnrIBvfFU3zEB/DrGdcoRIQ==
+  dependencies:
+    jquery ">=1.8"
+    jquery-validation ">=1.16"
+
+jquery-validation@>=1.16, jquery-validation@^1.19.1:
+  version "1.19.1"
+  resolved "https://registry.yarnpkg.com/jquery-validation/-/jquery-validation-1.19.1.tgz#a85043467dc2b70d9fff05778646d150e747742f"
+  integrity sha512-QNnrZBqSltWUEJx+shOY5WtfrIb0gWmDjFfQP8rZKqMMSfpRSwEkSqhfHPvDfkObD8Hnv5KHSYI8yg73sVFdqA==
+
 jquery.nicescroll@^3.7.6:
   version "3.7.6"
   resolved "https://registry.yarnpkg.com/jquery.nicescroll/-/jquery.nicescroll-3.7.6.tgz#afeff3e80658dabe4f78d2d2e84250060fea0852"
@@ -4962,7 +4982,7 @@ jquery.nicescroll@^3.7.6:
   dependencies:
     jquery ">=1.8.3"
 
-jquery@>=1.10, jquery@>=1.7, jquery@>=1.8.3, jquery@>=2.1.0, jquery@^3.0, jquery@^3.1.1, jquery@^3.4.1:
+jquery@>=1.10, jquery@>=1.7, jquery@>=1.8, jquery@>=1.8.3, jquery@>=2.1.0, jquery@^3.0, jquery@^3.1.1, jquery@^3.4.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.4.1.tgz#714f1f8d9dde4bdfa55764ba37ef214630d80ef2"
   integrity sha512-36+AdBzCL+y6qjw5Tx7HgzeGCzC81MDDgaUP8ld2zhx58HdqXGoBd+tHdrBMiyjGQs0Hxs/MLZTu/eHNJJuWPw==
