@@ -30,7 +30,7 @@ namespace papuff.backoffice.Controllers {
                 var properties = new AuthenticationProperties {
                     AllowRefresh = false,
                     IsPersistent = true,
-                    ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(40)
+                    ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(60)
                 };
 
                 var claims = new[]{

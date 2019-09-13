@@ -16,7 +16,7 @@ function FormOnFail(error) {
     if (error.status === 500) {
         swal("Erro", response, "error");
     }
-    if (error.status === 400) {
-        swal("Atenção", response, "info");
-    }
+    //if (error.status === 400) {
+    //    swal("Atenção", response, "info");
+    //}
 }
