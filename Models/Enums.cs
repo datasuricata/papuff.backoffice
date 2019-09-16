@@ -41,4 +41,36 @@ namespace papuff.backoffice.Models {
         [Display(Description = "Bloqueado")]
         Blocked = 4
     }
+
+    public enum BuildingType {
+
+        [Display(Description = "Sem Definição")]
+        Undefined = 0,
+
+        [Display(Description = "Casa")]
+        House = 1,
+
+        [Display(Description = "Sobrado")]
+        Townhouse = 2,
+
+        [Display(Description = "Apartamento")]
+        Apartment = 3,
+
+        [Display(Description = "Comercial")]
+        Commercial = 4,
+    }
+
+    public enum DocumentType {
+        [Display(Description = "Registro Geral")]
+        RG = 1,
+
+        [Display(Description = "Cadastro de Pessoa Física")]
+        CPF = 2,
+
+        [Display(Description = "Cadastro Nacional da Pessoa Jurídica")]
+        CNPJ = 3,
+
+        [Display(Description = "Carteira Nacional de Habilitação")]
+        CNH = 5,
+    }
 }

@@ -1,5 +1,8 @@
 ﻿@model papuff.backoffice.Models.Response.GeneralResponse
 
+@using papuff.backoffice.Models.Helpers
+@using System.Security.Claims
+
 @{
     ViewData["Title"] = "Dados Gerais";
     ViewBag.General = "active";
@@ -48,7 +51,7 @@
                         <div class="profile-widget-name">
                             Etapa de Cadastro
                             <div class="float-right">
-                                <button class="btn btn-sm btn-success">Aprovar</button>
+                                <button class="btn btn-sm btn-success">@Model.Stage.EnumDisplay()</button>
                             </div>
                             <div class="text-danger d-inline font-weight-normal"><div class="slash"></div> Pendente</div>
                         </div>
@@ -71,6 +74,10 @@
             <div class="col-12 col-md-12">
                 <div class="card">
                     <form method="post" class="needs-validation" novalidate="">
+
+                        <input hidden asp-for="Id" />
+                        <input hidden asp-for="UserId" />
+
                         <div class="card-header">
                             <h4>Alterar Dados Gerais</h4>
                         </div>
@@ -94,15 +101,20 @@
                                 </div>
                                 <div class="form-group col-md-6 col-12">
                                     <label>Telefone</label>
-                                    <input type="tel" class="form-control" value="">
+                                    <input type="tel" asp-for="Phone" class="form-control" value="">
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="form-group col-12">
-                                    <label>Descrição</label>
-                                    <textarea class="form-control" asp-for="Description" style="height:120px;"></textarea>
+
+                            @if (Model.UserId == User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value) {
+
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>Descrição</label>
+                                        <textarea class="form-control" asp-for="Description" style="height:120px;"></textarea>
+                                    </div>
                                 </div>
-                            </div>
+                            }
+
                         </div>
                         <div class="card-footer text-right">
                             <button class="btn btn-primary">Savar</button>
@@ -113,3 +125,7 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

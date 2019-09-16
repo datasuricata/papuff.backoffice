@@ -33,12 +33,9 @@ gulp.task('js', function () {
         './assets/js/scripts.js',
         './assets/js/custom.js',
     ])
-    //    .pipe(ngAnnotate())
-<<<<<<< HEAD
-    //    .pipe(jsuglify())
-=======
-  //      .pipe(jsuglify())
->>>>>>> 2b9c57c175f3f54f89bbb9ccf768518fefdd6fd1
+        //    .pipe(ngAnnotate())
+        //    .pipe(jsuglify())
+        //      .pipe(jsuglify())
         .pipe(gulp.dest('wwwroot/js'));
     // .pipe(browserSync.stream());
 });

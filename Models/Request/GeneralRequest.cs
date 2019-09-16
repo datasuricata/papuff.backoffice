@@ -7,12 +7,14 @@ namespace papuff.backoffice.Models.Request {
         public DateTime BirthDate { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public string Phone { get; set; }
 
         public static explicit operator GeneralRequest(GeneralResponse v) {
             return v == null ? null : new GeneralRequest {
                 Id = v.Id,
                 BirthDate = v.BirthDate,
                 Description = v.Description,
+                Phone = v.Phone,
                 Name = v.Name,
             };
         }

@@ -1,0 +1,111 @@
+﻿@model IEnumerable<papuff.backoffice.Models.Response.DocumentResponse>
+@using papuff.backoffice.Models.Helpers
+@using papuff.backoffice.Models.Request
+
+@{
+    ViewData["Title"] = "Documentos";
+    ViewBag.Documents = "active";
+
+    var command = new DocumentRequest();
+}
+
+<div class="section-header">
+    <h1>@ViewData["Title"]</h1>
+    <div class="section-header-breadcrumb">
+        <div class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Dashboard</a></div>
+        <div class="breadcrumb-item"><a asp-controller="User" asp-action="Profile">Perfil</a></div>
+        <div class="breadcrumb-item active">@ViewData["Title"]</div>
+    </div>
+</div>
+
+<div class="section-body">
+    <h2 class="section-title">Configurações de Endereço</h2>
+
+    <p class="section-lead">
+        Configurações de documentos do usuário
+    </p>
+
+    <div id="output-status"></div>
+    <div class="row">
+
+        <div class="col-md-4">
+            <partial name="_LayoutProfile.cshtml" />
+        </div>
+
+        <div class="col-md-8">
+            <div class="col-md-12">
+                <form asp-action="User" id="setting-form" asp-controller="Document" asp-anti-forgery class="needs-validation" novalidate="" data-ajax="true" data-ajax-method="POST" data-ajax-failure="FormOnFail" data-ajax-success="window.location = '/User/Document'">
+                    <div class="card" id="settings-card">
+                        <div class="card-header">
+                            <h4>Criar Documento</h4>
+                        </div>
+                        <div class="card-body">
+                            <p class="text-muted">Criar novo documento</p>
+
+                            <div class="form-group row align-items-center">
+                                <label for="building" class="form-control-label col-sm-3 text-md-right">Tipo de Contrução</label>
+                                <div class="col-sm-6 col-md-9">
+                                    <select class="form-control" name="type" asp-items="Helper.ToDropDown<DocumentType>()">
+                                        <option selected="selected" value="">Selecione</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row align-items-center">
+                                <label for="images" class="form-control-label col-sm-3 text-md-right">Imagem</label>
+                                <div class="col-sm-6 col-md-9">
+                                    <input type="text" class="form-control" name="imageUri" id="images">
+                                </div>
+                            </div>
+
+                            <div class="form-group row align-items-center">
+                                <label for="document" class="form-control-label col-sm-3 text-md-right">Dados</label>
+                                <div class="col-sm-6 col-md-9">
+                                    <input type="text" class="form-control" name="imageUri" id="document" required>
+                                    <div class="invalid-feedback">
+                                        informe os dados do documento
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card-footer bg-whitesmoke text-md-right">
+                            <button class="btn btn-primary" id="save-btn">Salvar</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+
+            @foreach (var doc in Model) {
+                <div class="col-md-4">
+                    <form asp-action="User" id="setting-form" asp-controller="Document" asp-anti-forgery class="needs-validation" novalidate="" data-ajax="true" data-ajax-method="POST" data-ajax-failure="FormOnFail" data-ajax-success="window.location = '/User/Document'">
+                        <div class="card shadow" id="@doc.Id">
+                            <div class="card-header">
+                                <h4>@Helper.EnumDisplay(doc.Type)</h4>
+                                <div class="card-header-action">
+                                    <a data-dismiss="#@doc.Id" class="btn btn-icon btn-danger" href="#"><i class="fas fa-times"></i></a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-2 text-muted"><b>@doc.Value</b></div>
+                                <div class="chocolat-parent">
+                                    <a href="../dist/img/example-image.jpg" class="chocolat-image" title="Just an example">
+                                        <div data-crop-image="285" style="overflow: hidden; position: relative; max-height: 200px;">
+                                            <img alt="image" src="../dist/img/example-image.jpg" class="img-fluid">
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,151 @@
+﻿@model papuff.backoffice.Models.Response.AddressResponse
+@using papuff.backoffice.Models.Helpers
+@using System.Security.Claims
+
+@{
+    ViewData["Title"] = "Endereço";
+    ViewBag.Address = "active";
+}
+
+<div class="section-header">
+    <h1>@ViewData["Title"]</h1>
+    <div class="section-header-breadcrumb">
+        <div class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Dashboard</a></div>
+        <div class="breadcrumb-item"><a asp-controller="User" asp-action="Profile">Perfil</a></div>
+        <div class="breadcrumb-item active">@ViewData["Title"]</div>
+    </div>
+</div>
+
+<div class="section-body">
+    <h2 class="section-title">Configurações de Endereço</h2>
+
+    <p class="section-lead">
+        Configurações de endereço do usuário
+    </p>
+
+    <div id="output-status"></div>
+    <div class="row">
+
+        <div class="col-md-4">
+            <partial name="_LayoutProfile.cshtml" />
+        </div>
+
+        <div class="col-md-8">
+            <form asp-action="User" id="setting-form" asp-controller="Address" asp-anti-forgery class="needs-validation" novalidate="" data-ajax="true" data-ajax-method="POST" data-ajax-failure="FormOnFail" data-ajax-success="window.location = '/User/Address'">
+                <div class="card" id="settings-card">
+                    <div class="card-header">
+                        <h4>Alterar Endereço</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">Alterações de endereço do usuário</p>
+
+                        <input hidden asp-for="Id" />
+                        <input hidden asp-for="UserId" />
+
+                        <div class="form-group row align-items-center">
+                            <label for="building" class="form-control-label col-sm-3 text-md-right">Tipo de Contrução</label>
+                            <div class="col-sm-6 col-md-9">
+                                <select class="form-control" asp-for="Building" asp-items="Helper.ToDropDown<BuildingType>()">
+                                    @*<option selected="selected" value="">Please select</option>*@
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row align-items-center">
+                            <label for="postal-code" class="form-control-label col-sm-3 text-md-right">CEP</label>
+                            <div class="col-sm-6 col-md-9">
+                                <input type="text" class="form-control" asp-for="PostalCode" id="postal-code" required>
+                                <div class="invalid-feedback">
+                                    código postal é obrigatório
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row align-items-center">
+                            <label for="street" class="form-control-label col-sm-3 text-md-right">Rua</label>
+                            <div class="col-sm-6 col-md-9">
+                                <input type="text" class="form-control" asp-for="AddressLine" id="street" required>
+                                <div class="invalid-feedback">
+                                    rua é obrigatória
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row align-items-center">
+                            <label for="number" class="form-control-label col-sm-3 text-md-right">Número</label>
+                            <div class="col-sm-6 col-md-9">
+                                <input type="number" class="form-control" asp-for="Number" id="number" required>
+                                <div class="invalid-feedback">
+                                    número é obrigatório
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row align-items-center">
+                            <label for="complement" class="form-control-label col-sm-3 text-md-right">Complemento</label>
+                            <div class="col-sm-6 col-md-9">
+                                <input type="text" class="form-control" asp-for="Complement" id="complement">
+                            </div>
+                        </div>
+
+                        <div class="form-group row align-items-center">
+                            <label for="district" class="form-control-label col-sm-3 text-md-right">Bairro</label>
+                            <div class="col-sm-6 col-md-9">
+                                <input type="text" class="form-control" asp-for="District" id="district" required>
+                                <div class="invalid-feedback">
+                                    informe o bairro
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row align-items-center">
+                            <label for="city" class="form-control-label col-sm-3 text-md-right">Cidade</label>
+                            <div class="col-sm-6 col-md-9">
+                                <input type="text" class="form-control" asp-for="City" id="city" readonly required>
+                                <div class="invalid-feedback">
+                                    informe a cidade
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row align-items-center">
+                            <label for="state" class="form-control-label col-sm-3 text-md-right">Estado</label>
+                            <div class="col-sm-6 col-md-9">
+                                <input type="text" class="form-control" asp-for="StateProvince" id="state" required>
+                                <div class="invalid-feedback">
+                                    informe o estado
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row align-items-center">
+                            <label for="country" class="form-control-label col-sm-3 text-md-right">País</label>
+                            <div class="col-sm-6 col-md-9">
+                                <input type="text" class="form-control" asp-for="Country" id="country" required>
+                                <div class="invalid-feedback">
+                                    informe o país
+                                </div>
+                            </div>
+                        </div>
+
+                        @*<select asp-for="EmployeeId" asp-items="@Model.Employees">
+                                <option>Please select one</option>
+                            </select>*@
+
+                        @*<select asp-for="Building" asp-items="Html.GetEnumSelectList<BuildingType>()">
+                                <option selected="selected" value="">Please select</option>
+                            </select>*@
+
+                    </div>
+                    <div class="card-footer bg-whitesmoke text-md-right">
+                        <button class="btn btn-primary" id="save-btn">Salvar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

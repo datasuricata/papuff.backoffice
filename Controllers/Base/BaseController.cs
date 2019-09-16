@@ -54,35 +54,11 @@ namespace papuff.backoffice.Controllers.Base {
         #region - components -
 
         protected List<SelectListItem> ToDropDown<T>(IEnumerable<T> list, string text, string value) {
-            var dropdown = list.Select(item => new SelectListItem {
-                Text = item.GetType()
-                    .GetProperty(text)
-                    .GetValue(item, null) as string,
-
-                Value = item.GetType()
-                    .GetProperty(value)
-                    .GetValue(item, null) as string
-            }).ToList();
-
-            return dropdown.OrderBy(x => x.Text).ToList();
+            return Helper.ToDropDown(list, text, value);
         }
 
-        /// <summary>
-        /// Create a Dropdown Enum
-        /// </summary>
-        /// <typeparam name="T">Generic Enum</typeparam>
-        /// <param name="prop">Exclude attribute</param>
-        /// <returns></returns>
-        protected List<SelectListItem> ToEnumDropDown<T>(string prop = "") {
-            var dropdown = new List<SelectListItem>();
-            foreach (var i in Enum.GetValues(typeof(T))) {
-                if (prop == Enum.GetName(typeof(T), i)) continue;
-                var sItem = new SelectListItem {
-                    Text = (i as Enum).EnumDisplay(), Value = ((int)i).ToString()
-                };
-                dropdown.Add(sItem);
-            }
-            return dropdown.OrderBy(x => x.Text).ToList();
+        protected List<SelectListItem> ToDropDown<T>() {
+            return Helper.ToDropDown<T>();
         }
 
         /// <summary>

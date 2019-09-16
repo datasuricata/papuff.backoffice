@@ -55,20 +55,37 @@ namespace papuff.backoffice.Controllers {
 
         #endregion
 
+        #region - address -
 
-        public IActionResult Address() {
-            return View();
+        public async Task<IActionResult> Address() {
+            return View(await Get<AddressResponse>("address/me"));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Address(AddressResponse form) {
+            var command = (AddressRequest)form;
+
+            if (ModelState.IsValid)
+                await Post<BaseResponse>("address/register", command);
+
+            return RedirectToAction(nameof(Address));
+        }
+
+        #endregion
+
+        #region - document -
+
+        public async Task<IActionResult> Document() {
+            return View(await Get<List<DocumentResponse>>("document/me"));
+        }
+
+        #endregion
 
         public IActionResult Wallets() {
             return View();
         }
 
         public IActionResult Companies() {
-            return View();
-        }
-
-        public IActionResult Documents() {
             return View();
         }
     }
