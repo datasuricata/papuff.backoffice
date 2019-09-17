@@ -73,4 +73,15 @@ namespace papuff.backoffice.Models {
         [Display(Description = "Carteira Nacional de Habilitação")]
         CNH = 5,
     }
+
+    public enum PaymentType {
+        [Display(Description = "Cartão de Crédito")]
+        Credit = 1,
+
+        [Display(Description = "Cartão de Débito")]
+        Debit = 2,
+
+        [Display(Description = "Boleto Bancário")]
+        BankSlip = 3
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using papuff.backoffice.Controllers.Base;
+using papuff.backoffice.Models;
 using papuff.backoffice.Models.Helpers;
 using papuff.backoffice.Models.Request;
 using papuff.backoffice.Models.Response;
@@ -48,7 +49,7 @@ namespace papuff.backoffice.Controllers {
             var command = (GeneralRequest)form;
 
             if (ModelState.IsValid)
-                await Post<BaseResponse>("general/register", command);
+                await Post<BaseResponse>("general/create", command);
 
             return RedirectToAction(nameof(General));
         }
@@ -66,7 +67,7 @@ namespace papuff.backoffice.Controllers {
             var command = (AddressRequest)form;
 
             if (ModelState.IsValid)
-                await Post<BaseResponse>("address/register", command);
+                await Post<BaseResponse>("address/create", command);
 
             return RedirectToAction(nameof(Address));
         }
@@ -76,14 +77,57 @@ namespace papuff.backoffice.Controllers {
         #region - document -
 
         public async Task<IActionResult> Document() {
-            return View(await Get<List<DocumentResponse>>("document/me"));
+            return View(await Get<IEnumerable<DocumentResponse>>("document/me"));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Document(string imageUri, string value, DocumentType type) {
+            var command = new DocumentRequest {
+                ImageUri = imageUri, Value = value, Type = type
+            };
+
+            if (ModelState.IsValid)
+                await Post<BaseResponse>("document/create", command);
+
+            return RedirectToAction(nameof(Document));
+        }
+
+        public async Task<IActionResult> DocumentDelete(string id) {
+
+            if (ModelState.IsValid)
+                await Put<BaseResponse>($"document/delete/{id}", null);
+
+            return RedirectToAction(nameof(Document));
+        }
+
+        public async Task<IActionResult> DocumentPadLock(string id) {
+
+            if (ModelState.IsValid)
+                await Put<BaseResponse>($"document/padLock/{id}", null);
+
+            return RedirectToAction(nameof(Document));
         }
 
         #endregion
 
-        public IActionResult Wallets() {
-            return View();
+        #region - wallets -
+
+        public async Task<IActionResult> Wallet() {
+            return View(await Get<IEnumerable<WalletResponse>>("wallet/me"));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Wallet(WalletResponse form) {
+            var command = (WalletRequest)form;
+
+            if (ModelState.IsValid)
+                await Post<BaseResponse>("wallet/create", command);
+
+            return RedirectToAction(nameof(Wallet));
+        }
+
+        #endregion
+
 
         public IActionResult Companies() {
             return View();

@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<papuff.backoffice.Models.Response.DocumentResponse>
+
 @using papuff.backoffice.Models.Helpers
 @using papuff.backoffice.Models.Request
 
@@ -33,79 +34,86 @@
         </div>
 
         <div class="col-md-8">
-            <div class="col-md-12">
-                <form asp-action="User" id="setting-form" asp-controller="Document" asp-anti-forgery class="needs-validation" novalidate="" data-ajax="true" data-ajax-method="POST" data-ajax-failure="FormOnFail" data-ajax-success="window.location = '/User/Document'">
-                    <div class="card" id="settings-card">
-                        <div class="card-header">
-                            <h4>Criar Documento</h4>
+            <form asp-action="User" id="setting-form" asp-controller="Document" asp-anti-forgery class="needs-validation" novalidate="" data-ajax="true" data-ajax-method="POST" data-ajax-failure="FormOnFail" data-ajax-success="window.location = '/User/Document'">
+                <div class="card" id="settings-card">
+                    <div class="card-header">
+                        <h4>Criar Documento</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">Criar novo documento</p>
+
+                        <div class="form-group row align-items-center">
+                            <label for="building" class="form-control-label col-sm-3 text-md-right">Tipo de Contrução</label>
+                            <div class="col-sm-6 col-md-9">
+                                <select class="form-control" name="type" asp-items="Helper.ToDropDown<DocumentType>()">
+                                    <option selected="selected" value="">Selecione</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <p class="text-muted">Criar novo documento</p>
 
-                            <div class="form-group row align-items-center">
-                                <label for="building" class="form-control-label col-sm-3 text-md-right">Tipo de Contrução</label>
-                                <div class="col-sm-6 col-md-9">
-                                    <select class="form-control" name="type" asp-items="Helper.ToDropDown<DocumentType>()">
-                                        <option selected="selected" value="">Selecione</option>
-                                    </select>
+                        <div class="form-group row align-items-center">
+                            <label for="document" class="form-control-label col-sm-3 text-md-right">Dados</label>
+                            <div class="col-sm-6 col-md-9">
+                                <input type="text" class="form-control" name="value" id="document" required>
+                                <div class="invalid-feedback">
+                                    informe os dados do documento
                                 </div>
                             </div>
-
-                            <div class="form-group row align-items-center">
-                                <label for="images" class="form-control-label col-sm-3 text-md-right">Imagem</label>
-                                <div class="col-sm-6 col-md-9">
-                                    <input type="text" class="form-control" name="imageUri" id="images">
-                                </div>
-                            </div>
-
-                            <div class="form-group row align-items-center">
-                                <label for="document" class="form-control-label col-sm-3 text-md-right">Dados</label>
-                                <div class="col-sm-6 col-md-9">
-                                    <input type="text" class="form-control" name="imageUri" id="document" required>
-                                    <div class="invalid-feedback">
-                                        informe os dados do documento
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
-                        <div class="card-footer bg-whitesmoke text-md-right">
-                            <button class="btn btn-primary" id="save-btn">Salvar</button>
+
+                        <div class="form-group row align-items-center">
+                            <label class="form-control-label col-sm-3 text-md-right">Imagem</label>
+                            <div class="col-sm-6 col-md-9">
+                                <input type="text" class="form-control" name="imageUri" id="document" required>
+                                @*<div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="customFile">
+                                        <label class="custom-file-label" for="customFile"></label>
+                                    </div>*@
+                                <div class="form-text text-muted">a imagem deve ter no maximo 1MB</div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-footer bg-whitesmoke text-md-right">
+                        <button class="btn btn-primary" id="save-btn">Salvar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        @foreach (var doc in Model) {
+            <div class="col-md-3">
+                <div class="card shadow" id="@doc.Id">
+                    <div class="card-header">
+                        <h4>@Helper.EnumDisplay(doc.Type)</h4>
+                        <div class="card-header-action">
+                            <a data-dismiss="#@doc.Id" class="btn btn-icon btn-danger" href="#" onclick="Delete('@doc.Id');" style="border-radius: 3px !important;"><i class="fas fa-times"></i></a>
                         </div>
                     </div>
-                </form>
-
-            </div>
-
-
-            @foreach (var doc in Model) {
-                <div class="col-md-4">
-                    <form asp-action="User" id="setting-form" asp-controller="Document" asp-anti-forgery class="needs-validation" novalidate="" data-ajax="true" data-ajax-method="POST" data-ajax-failure="FormOnFail" data-ajax-success="window.location = '/User/Document'">
-                        <div class="card shadow" id="@doc.Id">
-                            <div class="card-header">
-                                <h4>@Helper.EnumDisplay(doc.Type)</h4>
-                                <div class="card-header-action">
-                                    <a data-dismiss="#@doc.Id" class="btn btn-icon btn-danger" href="#"><i class="fas fa-times"></i></a>
+                    <div class="card-body">
+                        <div class="mb-2 text-muted"><b>@doc.Value</b></div>
+                        <div class="chocolat-parent">
+                            <a href="../dist/img/example-image.jpg" class="chocolat-image" title="Just an example">
+                                <div data-crop-image="285" style="overflow: hidden; position: relative; max-height: 200px;">
+                                    <img alt="image" src="../dist/img/example-image.jpg" class="img-fluid">
                                 </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="mb-2 text-muted"><b>@doc.Value</b></div>
-                                <div class="chocolat-parent">
-                                    <a href="../dist/img/example-image.jpg" class="chocolat-image" title="Just an example">
-                                        <div data-crop-image="285" style="overflow: hidden; position: relative; max-height: 200px;">
-                                            <img alt="image" src="../dist/img/example-image.jpg" class="img-fluid">
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
+                            </a>
                         </div>
-                    </form>
+                    </div>
                 </div>
-            }
-        </div>
+            </div>
+        }
+
     </div>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script type="text/javascript">
+        function Delete(id) {
+            $.get("/User/DocumentDelete?id=" + id);
+        }
+
+    </script>
 }

@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using papuff.backoffice.Controllers.Base;
-using papuff.backoffice.Models;
 using papuff.backoffice.Models.Helpers;
 using papuff.backoffice.Models.Request;
 using papuff.backoffice.Models.Response;
