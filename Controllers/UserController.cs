@@ -128,7 +128,6 @@ namespace papuff.backoffice.Controllers {
 
         #endregion
 
-
         public IActionResult Companies() {
             return View();
         }
