@@ -113,15 +113,35 @@ namespace papuff.backoffice.Controllers {
         #region - wallets -
 
         public async Task<IActionResult> Wallet() {
-            return View(await Get<IEnumerable<WalletResponse>>("wallet/me"));
+
+            var vm = await Get<WalletResponse>("wallet/me");
+
+            if (vm is null) {
+                await Get<BaseResponse>($"wallet/{LoggedLess}");
+                return RedirectToAction(nameof(Wallet));
+            }
+
+            return View(vm);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Wallet(WalletResponse form) {
+        public async Task<IActionResult> Receipt(WalletResponse form) {
             var command = (WalletRequest)form;
 
             if (ModelState.IsValid)
-                await Post<BaseResponse>("wallet/create", command);
+                await Post<BaseResponse>($"receipt/{id}/update", command);
+
+            return RedirectToAction(nameof(Wallet));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Payment(string id, int dateDue, dynamic expirationDate, string document, int code, string card, PaymentType type) {
+            var command = new PaymentRequest {
+                Card = card, Code = code, DateDue = dateDue, Document = document, Type = type
+            };
+
+            if (ModelState.IsValid)
+                await Post<BaseResponse>($"wallet/payment/{id}/create", command);
 
             return RedirectToAction(nameof(Wallet));
         }

@@ -19,10 +19,16 @@ namespace papuff.backoffice.Controllers.Base {
                     (IEventNotifier)HttpContext.RequestServices
                         .GetService(typeof(IEventNotifier));
 
+        /// <summary>
+        /// return user info from current context
+        /// </summary>
+        /// <returns></returns>
+        protected string LoggedLess => User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
         #region - async -
 
         private string GetCurrentToken() =>
-            HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Hash)?.Value;
+            User?.FindFirst(ClaimTypes.Hash)?.Value;
 
         protected async Task<T> Get<T>(string uri) {
             var request = new DataRequest<T>(Endpoint.api, _notify);

@@ -1,13 +1,10 @@
-﻿@model IEnumerable<papuff.backoffice.Models.Response.WalletResponse>
+﻿@model papuff.backoffice.Models.Response.WalletResponse
 
 @using papuff.backoffice.Models.Helpers
-@using papuff.backoffice.Models.Request
 
 @{
     ViewData["Title"] = "Carteiras";
     ViewBag.Wallets = "active";
-
-    var command = new DocumentRequest();
 }
 
 <div class="section-header">
@@ -31,10 +28,69 @@
 
         <div class="col-md-4">
             <partial name="_LayoutProfile.cshtml" />
+
+            @foreach (var card in Model.Payments) {
+                <div class="col-md-12">
+                    <div class="card shadow" id="@card.Id">
+                        <div class="card-header">
+                            <h4>@Helper.EnumDisplay(card.Type)</h4>
+                            <div class="card-header-action">
+                                <a data-dismiss="#@card.Id" class="btn btn-icon btn-danger" href="#" onclick="Delete('@card.Id');" style="border-radius: 3px !important;"><i class="fas fa-times"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-2 text-muted">Cartão: <b class="text-warning">...@card.Card.Substring(card.Card.Length - 4)</b></div>
+                            <div class="mb-2 text-muted">
+                                Documento: <b class="text-warning">...@card.Document.Substring(card.Document.Length - 4)</b>
+                                <label class="float-right custom-switch mt-2">
+                                    <input type="checkbox" checked="@card.IsDefault" name="@card.IsDefault" class="custom-switch-input">
+                                    <span class="custom-switch-indicator"></span>
+                                    <span class="custom-switch-description text-muted">Seleção padrão</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
 
         <div class="col-md-8">
             <form asp-action="User" id="setting-form" asp-controller="Wallet" asp-anti-forgery class="needs-validation" novalidate="" data-ajax="true" data-ajax-method="POST" data-ajax-failure="FormOnFail" data-ajax-success="window.location = '/User/Document'">
+                <div class="card" id="settings-card">
+                    <div class="card-header">
+                        <h4>Conta de Recebimento</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">Atualizar dados bancarios para recebimento</p>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="datedue">Data de Processamento</label>
+                                <select class="form-control" asp-for="Receipt.DateDue">
+                                    <option>Selecione</option>
+                                    <option>5</option>
+                                    <option>10</option>
+                                    <option>15</option>
+                                    <option>20</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label>Agencia</label>
+                                <input type="text" asp-for="Receipt.Agency" class="form-control creditcard">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="expiration">Conta</label>
+                                <input type="text" asp-for="Receipt.Account" class="form-control" id="expiration">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-whitesmoke text-md-right">
+                        <button class="btn btn-primary" id="save-btn">Salvar</button>
+                    </div>
+                </div>
+            </form>
+
+            <form asp-action="Payment" asp-controller="User" asp-anti-forgery class="needs-validation" novalidate="" data-ajax="true" data-ajax-method="POST" data-ajax-failure="FormOnFail" data-ajax-success="window.location = '/User/Wallet'">
+                <input hidden asp-for="Id" />
                 <div class="card" id="settings-card">
                     <div class="card-header">
                         <h4>Criar Pagamento</h4>
@@ -42,13 +98,13 @@
                     <div class="card-body">
                         <p class="text-muted">Criar nova forma de pagamento</p>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 <label for="inputEmail4">Tipo de Pagamento</label>
                                 <select class="form-control" name="type" asp-items="Helper.ToDropDown<PaymentType>()">
                                     <option selected="selected" value="">Selecione</option>
                                 </select>
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 <label for="datedue">Data de Processamento</label>
                                 <select class="form-control" name="dateDue">
                                     <option>Selecione</option>
@@ -58,78 +114,38 @@
                                     <option>20</option>
                                 </select>
                             </div>
+                            <div class="form-group col-md-4">
+                                <label for="document">Documento</label>
+                                <input type="text" name="document" class="form-control" id="document">
+                            </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label>Cartão</label>
-                                <input type="text" class="form-control creditcard">
+                                <input type="text" name="card" class="form-control creditcard">
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="expiration">Data</label>
-                                <input type="date" asp-format="{MM/YYYY}" class="form-control" id="expiration">
+                                <label for="expiration">Data Expiração</label>
+                                <input type="time" name="expirationDate" class="form-control" id="expiration">
                             </div>
                             <div class="form-group col-md-2">
                                 <label for="code">Code</label>
-                                <input type="text" class="form-control" id="code">
+                                <input type="text" name="code" class="form-control" id="code">
                             </div>
                         </div>
-
-                        <div class="form-row">
-                            <div class="form-group col-md-2">
-                                <label>Agencia</label>
-                                <input type="text" pattern="" class="form-control creditcard">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="expiration">Conta</label>
-                                <input type="text" class="form-control" id="expiration">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="expiration">Documento</label>
-                                <input type="text" class="form-control" id="expiration">
-                            </div>
-                        </div>
-
                     </div>
 
                     <div class="card-footer bg-whitesmoke text-md-right">
-                        <button class="btn btn-primary" id="save-btn">Salvar</button>
+                        <button type="submit" class="btn btn-primary" id="save-btn">Salvar</button>
                     </div>
                 </div>
             </form>
         </div>
-
-        @foreach (var wallet in Model) {
-                <div class="col-md-3">
-                    <div class="card shadow" id="@wallet.Id">
-                        <div class="card-header">
-                            <h4>@Helper.EnumDisplay(wallet.Type)</h4>
-                            <div class="card-header-action">
-                                <a data-dismiss="#@wallet.Id" class="btn btn-icon btn-danger" href="#" onclick="Delete('@wallet.Id');" style="border-radius: 3px !important;"><i class="fas fa-times"></i></a>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="mb-2 text-muted">Documento: <b class="text-warning">@wallet.Document</b></div>
-                            <div class="mb-2 text-muted">Data de Processamento: <b class="text-warning">@wallet.DateDue</b></div>
-                            <div class="mb-2 text-muted">Agencia: <b class="text-warning">@wallet.Agency</b></div>
-                            <div class="mb-2 text-muted">Conta: <b class="text-warning">@wallet.Account</b></div>
-                            <div class="mb-2 text-muted">Cartão: <b class="text-warning">@wallet.Card</b></div>
-                        </div>
-                    </div>
-                </div>
-            }
-
     </div>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-
     <script src="~/js/forms-advanced-forms.js"></script>
-
-    @*<script type="text/javascript">
-            function Delete(id) {
-                $.get("/User/DocumentDelete?id=" + id);
-            }
-        </script>*@
 }

@@ -12,9 +12,7 @@ namespace papuff.backoffice.Models.Request {
 
         public static explicit operator WalletRequest(WalletResponse v) {
             return v == null ? null : new WalletRequest {
-                Id = v.Id, Account = v.Account, Agency = v.Agency,
-                DateDue = v.DateDue, Document = v.Document,
-                IsDefault = v.IsDefault, Type = v.Type,
+                Id = v.Id,
             };
         }
     }
