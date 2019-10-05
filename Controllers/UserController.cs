@@ -6,6 +6,7 @@ using papuff.backoffice.Models.Helpers;
 using papuff.backoffice.Models.Request;
 using papuff.backoffice.Models.Response;
 using papuff.backoffice.Models.Response.Base;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -126,30 +127,49 @@ namespace papuff.backoffice.Controllers {
 
         [HttpPost]
         public async Task<IActionResult> Receipt(WalletResponse form) {
-            var command = (WalletRequest)form;
+            var command = new ReceiptRequest {
+                WalletId = form.Receipt.WalletId, DateDue = form.Receipt.DateDue,
+                Account = form.Receipt.Account, Agency = form.Receipt.Agency,
+            };
 
             if (ModelState.IsValid)
-                await Post<BaseResponse>($"receipt/{id}/update", command);
+                await Post<BaseResponse>($"wallet/receipt/update", command);
 
             return RedirectToAction(nameof(Wallet));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Payment(string id, int dateDue, dynamic expirationDate, string document, int code, string card, PaymentType type) {
+        public async Task<IActionResult> Payment(string id, int dateDue, DateTime expirationDate, string document, int code, string card, PaymentType type) {
             var command = new PaymentRequest {
-                Card = card, Code = code, DateDue = dateDue, Document = document, Type = type
+                Card = card, Code = code, DateDue = dateDue, Document = document, Type = type, WalletId = id, Expiration = expirationDate
             };
 
-            if (ModelState.IsValid)
-                await Post<BaseResponse>($"wallet/payment/{id}/create", command);
+            await Post<BaseResponse>($"wallet/payment/create", command);
 
             return RedirectToAction(nameof(Wallet));
         }
 
         #endregion
 
-        public IActionResult Companies() {
-            return View();
+        #region - company -
+
+        public async Task<IActionResult> Companies() {
+            return View(await Get<List<CompanyResponse>>("company/me"));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Companies(string name, string email, string cnpj, string registration, string tell, DateTime date, string siteUri) {
+            var command = new CompanyRequest {
+                CNPJ = cnpj, Email = email, Name = name, OpeningDate = date, 
+                Registration = registration, SiteUri = siteUri, Tell = tell
+            };
+
+            if (ModelState.IsValid)
+                await Post<BaseResponse>($"company/create", command);
+
+            return RedirectToAction(nameof(Companies));
+        }
+
+        #endregion
     }
 }

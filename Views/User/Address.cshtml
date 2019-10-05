@@ -37,7 +37,7 @@
                         <h4>Alterar Endereço</h4>
                     </div>
                     <div class="card-body">
-                        <p class="text-muted">Alterações de endereço do usuário</p>
+                        <p class="text-muted">Alterar Dados</p>
 
                         <input hidden asp-for="Id" />
                         <input hidden asp-for="UserId" />
@@ -46,7 +46,6 @@
                             <label for="building" class="form-control-label col-sm-3 text-md-right">Tipo de Contrução</label>
                             <div class="col-sm-6 col-md-9">
                                 <select class="form-control" asp-for="Building" asp-items="Helper.ToDropDown<BuildingType>()">
-                                    @*<option selected="selected" value="">Please select</option>*@
                                 </select>
                             </div>
                         </div>

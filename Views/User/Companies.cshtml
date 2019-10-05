@@ -1,0 +1,140 @@
+﻿@model IEnumerable<papuff.backoffice.Models.Response.CompanyResponse>
+
+@using papuff.backoffice.Models.Helpers
+@using System.Security.Claims
+
+@{
+    ViewData["Title"] = "Empresa";
+    ViewBag.Companies = "active";
+}
+
+<div class="section-header">
+    <h1>@ViewData["Title"]</h1>
+    <div class="section-header-breadcrumb">
+        <div class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Dashboard</a></div>
+        <div class="breadcrumb-item"><a asp-controller="User" asp-action="Profile">Perfil</a></div>
+        <div class="breadcrumb-item active">@ViewData["Title"]</div>
+    </div>
+</div>
+
+<div class="section-body">
+    <h2 class="section-title">Configurações da Empresa</h2>
+    <p class="section-lead">
+        Configurações gerais da empresa
+    </p>
+
+    <div id="output-status"></div>
+    <div class="row">
+        <div class="col-md-4">
+            <partial name="_LayoutProfile.cshtml" />
+        </div>
+        <div class="col-md-8">
+            <div class="col-12 col-md-12">
+                <div class="card">
+                    <form asp-action="User" id="setting-form" asp-controller="Companies" asp-anti-forgery class="needs-validation" novalidate="" data-ajax="true" data-ajax-method="POST" data-ajax-failure="FormOnFail" data-ajax-success="window.location = '/User/Companies'">
+                        <div class="card-header">
+                            <h4>Criar Empresa</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-5 col-sm-5">
+                                    <label>Nome Fantasia</label>
+                                    <input type="text" class="form-control" name="name" required="">
+                                    <div class="invalid-feedback">
+                                        Please fill in the first name
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" name="email" required="">
+                                    <div class="invalid-feedback">
+                                        Please fill in the first name
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 col-sm-3">
+                                    <label>CNPJ</label>
+                                    <input type="text" class="form-control" name="cnpj" required="">
+                                    <div class="invalid-feedback">
+                                        Please fill in the first name
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label>Inscrição</label>
+                                    <input type="text" class="form-control" name="registration" required="">
+                                    <div class="invalid-feedback">
+                                        Please fill in the last name
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label>Telefone</label>
+                                    <input type="tel" class="form-control" name="tell" value="">
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label>Data de Abertura</label>
+                                    <input type="date" class="form-control" name="dateDue" value="">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12 col-12">
+                                    <label>www...</label>
+                                    <input type="text" class="form-control" name="siteUri" required="">
+                                    <div class="invalid-feedback">
+                                        Please fill in the first name
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-right">
+                            <button type="submit" class="btn btn-primary">Savar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Empresas Registradas</h4>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr class="text-center">
+                                <th scope="col">NOME FANTASIA</th>
+                                <th scope="col">CNPJ</th>
+                                <th scope="col">SITE</th>
+                                <th scope="col">
+                                    <button type="button" class="btn btn-round btn-icon">
+                                        <i class="fas fa-ellipsis-h"></i>
+                                    </button>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var company in Model) {
+                                <tr class="text-center">
+                                    <th scope="row">@company.Name</th>
+                                    <td>@company.CNPJ</td>
+                                    <td><a href="@company.SiteUri" target="_blank">@company.SiteUri</a></td>
+                                    <td>
+                                        <a style="width:30px;" href="#" class="btn btn-icon btn-sm btn-dark"><i class="fas fa-info-circle"></i></a>
+                                        <a style="width:30px;" href="#" class="btn btn-icon btn-sm btn-primary"><i class="far fa-edit"></i></a>
+                                        <a style="width:30px;" href="#" class="btn btn-icon btn-sm btn-danger"><i class="fas fa-times"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

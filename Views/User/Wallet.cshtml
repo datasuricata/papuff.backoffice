@@ -31,7 +31,7 @@
 
             @foreach (var card in Model.Payments) {
                 <div class="col-md-12">
-                    <div class="card shadow" id="@card.Id">
+                    <div class="card author-box card-primary shadow" id="@card.Id">
                         <div class="card-header">
                             <h4>@Helper.EnumDisplay(card.Type)</h4>
                             <div class="card-header-action">
@@ -55,7 +55,8 @@
         </div>
 
         <div class="col-md-8">
-            <form asp-action="User" id="setting-form" asp-controller="Wallet" asp-anti-forgery class="needs-validation" novalidate="" data-ajax="true" data-ajax-method="POST" data-ajax-failure="FormOnFail" data-ajax-success="window.location = '/User/Document'">
+            <form asp-action="Receipt" asp-controller="User" asp-anti-forgery class="needs-validation" novalidate="" data-ajax="true" data-ajax-method="POST" data-ajax-failure="FormOnFail" data-ajax-success="window.location = '/User/Wallet'">
+                <input hidden asp-for="Receipt.WalletId" />
                 <div class="card" id="settings-card">
                     <div class="card-header">
                         <h4>Conta de Recebimento</h4>
@@ -84,7 +85,7 @@
                         </div>
                     </div>
                     <div class="card-footer bg-whitesmoke text-md-right">
-                        <button class="btn btn-primary" id="save-btn">Salvar</button>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
                     </div>
                 </div>
             </form>
@@ -127,7 +128,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="expiration">Data Expiração</label>
-                                <input type="time" name="expirationDate" class="form-control" id="expiration">
+                                <input type="date" name="expirationDate" class="form-control" id="expiration">
                             </div>
                             <div class="form-group col-md-2">
                                 <label for="code">Code</label>
