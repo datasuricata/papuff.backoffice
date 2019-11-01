@@ -20,12 +20,6 @@
 </div>
 
 <div class="section-body">
-    <h2 class="section-title">Configurações de Endereço</h2>
-
-    <p class="section-lead">
-        Configurações de documentos do usuário
-    </p>
-
     <div id="output-status"></div>
     <div class="row">
 
@@ -35,7 +29,7 @@
 
         <div class="col-md-8">
             <form asp-action="User" id="setting-form" asp-controller="Document" asp-anti-forgery class="needs-validation" novalidate="" data-ajax="true" data-ajax-method="POST" data-ajax-failure="FormOnFail" data-ajax-success="window.location = '/User/Document'">
-                <div class="card" id="settings-card">
+                <div class="card bg-whitesmoke" id="settings-card">
                     <div class="card-header">
                         <h4>Criar Documento</h4>
                     </div>
@@ -70,7 +64,7 @@
                         </div>
 
                     </div>
-                    <div class="card-footer bg-whitesmoke text-md-right">
+                    <div class="card-footer text-md-right">
                         <button class="btn btn-primary" id="save-btn">Salvar</button>
                     </div>
                 </div>
@@ -79,7 +73,7 @@
 
         @foreach (var doc in Model) {
             <div class="col-md-3">
-                <div class="card shadow" id="@doc.Id">
+                <div class="card shadow bg-whitesmoke" id="@doc.Id">
                     <div class="card-header">
                         <h4>@Helper.EnumDisplay(doc.Type)</h4>
                         <div class="card-header-action">

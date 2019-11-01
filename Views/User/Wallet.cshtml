@@ -17,12 +17,6 @@
 </div>
 
 <div class="section-body">
-    <h2 class="section-title">Configurações de Carteira</h2>
-
-    <p class="section-lead">
-        Configurações de pagamento do usuário
-    </p>
-
     <div id="output-status"></div>
     <div class="row">
 
@@ -31,7 +25,7 @@
 
             @foreach (var card in Model.Payments) {
                 <div class="col-md-12">
-                    <div class="card author-box card-primary shadow" id="@card.Id">
+                    <div class="card author-box card-primary shadow bg-whitesmoke" id="@card.Id">
                         <div class="card-header">
                             <h4>@Helper.EnumDisplay(card.Type)</h4>
                             <div class="card-header-action">
@@ -57,7 +51,7 @@
         <div class="col-md-8">
             <form asp-action="Receipt" asp-controller="User" asp-anti-forgery class="needs-validation" novalidate="" data-ajax="true" data-ajax-method="POST" data-ajax-failure="FormOnFail" data-ajax-success="window.location = '/User/Wallet'">
                 <input hidden asp-for="Receipt.WalletId" />
-                <div class="card" id="settings-card">
+                <div class="card bg-whitesmoke" id="settings-card">
                     <div class="card-header">
                         <h4>Conta de Recebimento</h4>
                     </div>
@@ -84,7 +78,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer bg-whitesmoke text-md-right">
+                    <div class="card-footer text-md-right">
                         <button type="submit" class="btn btn-primary">Salvar</button>
                     </div>
                 </div>
@@ -92,7 +86,7 @@
 
             <form asp-action="Payment" asp-controller="User" asp-anti-forgery class="needs-validation" novalidate="" data-ajax="true" data-ajax-method="POST" data-ajax-failure="FormOnFail" data-ajax-success="window.location = '/User/Wallet'">
                 <input hidden asp-for="Id" />
-                <div class="card" id="settings-card">
+                <div class="card bg-whitesmoke" id="settings-card">
                     <div class="card-header">
                         <h4>Criar Pagamento</h4>
                     </div>
@@ -137,7 +131,7 @@
                         </div>
                     </div>
 
-                    <div class="card-footer bg-whitesmoke text-md-right">
+                    <div class="card-footer text-md-right">
                         <button type="submit" class="btn btn-primary" id="save-btn">Salvar</button>
                     </div>
                 </div>

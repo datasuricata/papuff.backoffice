@@ -7,7 +7,7 @@
     ViewBag.Profile = "active";
 }
 
-<div class="section-header">
+<div class="section-header bg-whitesmoke">
     <h1>@ViewData["Title"]</h1>
     <div class="section-header-breadcrumb">
         <div class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Dashboard</a></div>
@@ -16,12 +16,6 @@
 </div>
 
 <div class="section-body">
-    <h2 class="section-title">Configurações de Perfil</h2>
-
-    <p class="section-lead">
-        Configurações de perfil e usuário
-    </p>
-
     <div id="output-status"></div>
     <div class="row">
 
@@ -82,7 +76,7 @@
                         }
 
                     </div>
-                    <div class="card-footer bg-whitesmoke text-md-right">
+                    <div class="card-footer text-md-right">
                         <button class="btn btn-primary" id="save-btn">Salvar</button>
                     </div>
                 </div>
