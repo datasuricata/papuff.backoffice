@@ -13,10 +13,7 @@ using System.Threading.Tasks;
 namespace papuff.backoffice.Services.Requests {
     public class DataRequest<T> : BaseRequest {
 
-        private readonly IEventNotifier _notify;
-
-        public DataRequest(string baseUri, IEventNotifier notify) : base(baseUri) {
-            _notify = notify;
+        public DataRequest(string baseUri) : base(baseUri) {
         }
 
         private async Task HandleResponse(HttpResponseMessage response) {

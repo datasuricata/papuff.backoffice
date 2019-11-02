@@ -1,0 +1,184 @@
+﻿@model papuff.backoffice.Models.Request.RegisterRequest
+@using papuff.backoffice.Models.Helpers
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title>Registro &mdash; Papuff</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+          asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+          crossorigin="anonymous"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.css" />
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/components.css">
+</head>
+
+<body>
+    <div id="app">
+        <section class="section">
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
+                        <div class="login-brand">
+                            <div class="text-title">Papuff</div>
+                            @*<img src="assets/img/stisla-fill.svg" alt="logo" class="shadow-light rounded-circle" width="100">*@
+                        </div>
+
+                        <div class="card card-primary">
+                            <div class="card-header"><h4>Register</h4></div>
+
+                            <div class="card-body">
+                                <form asp-action="Register" id="setting-form" asp-controller="Auth" asp-anti-forgery class="needs-validation" novalidate="" data-ajax="true" data-ajax-method="POST" data-ajax-failure="FormOnFail" data-ajax-success="window.location = '/Account/Login'">
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label for="frist_name">Nome Completo</label>
+                                            <input id="frist_name" type="text" class="form-control" asp-for="Name" autofocus="">
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label for="last_name">Apelido</label>
+                                            <input id="last_name" type="text" class="form-control" asp-for="Nick">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input id="email" type="email" class="form-control" asp-for="Email">
+                                        <div class="invalid-feedback">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label for="password" class="d-block">Senha</label>
+                                            <input id="password" type="password" class="form-control pwstrength" data-indicator="pwindicator" asp-for="Password">
+                                            <div id="pwindicator" class="pwindicator">
+                                                <div class="bar"></div>
+                                                <div class="label"></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label for="password2" class="d-block">Confirmar Senha</label>
+                                            <input id="password2" type="password" class="form-control" asp-for="ConfirmPassword">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-divider">
+                                        Seu Endereço
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-3">
+                                            <label>Código Postal</label>
+                                            <input required type="text" id="postal" class="form-control" asp-for="Address.PostalCode">
+                                        </div>
+                                        <div class="form-group col-5">
+                                            <label>Logradouro</label>
+                                            <input type="text" readonly id="address" class="form-control" asp-for="Address.AddressLine">
+                                        </div>
+                                        <div class="form-group col-4">
+                                            <label>Número</label>
+                                            <input type="text" required class="form-control" asp-for="Address.Number">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label>Tipo de Contrução</label>
+                                            <select class="form-control" asp-for="Address.Building" asp-items="Helper.ToDropDown<BuildingType>()">
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-3">
+                                            <label>País</label>
+                                            <input type="text" value="BR" readonly class="form-control" asp-for="Address.Country">
+                                        </div>
+                                        <div class="form-group col-3">
+                                            <label>Estado</label>
+                                            <input type="text" readonly id="stateProvince" class="form-control" asp-for="Address.StateProvince">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label>Cidade</label>
+                                            <input type="text" readonly id="city" class="form-control" asp-for="Address.City">
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label>Bairro</label>
+                                            <input type="text" readonly id="district" class="form-control" asp-for="Address.District">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-9">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" asp-for="Aprove" class="custom-control-input" id="agree">
+                                                <label class="custom-control-label" for="agree">Eu aceito os termos e condições de uso</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-3">
+                                            <button type="button" class="btn btn-sm btn-danger float-right">
+                                                Termos de Uso
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-lg btn-block">
+                                            Registrar
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="simple-footer">
+                            Copyright &copy; Papuff @DateTime.Now.Year
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- General JS Scripts -->
+    <script src="~/js/tooltip.min.js"></script>
+
+    <!-- Page Specific JS File -->
+    <script src="../assets/js/page/auth-register.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="../js/stisla.js"></script>
+    <script src="../js/scripts.js"></script>
+    <script src="../js/custom.js"></script>
+
+
+    <script>
+
+        $(function () {
+            $("#postal").change(function () {
+                var value = $("#postal").val();
+                $.ajax({
+                    url: 'PostalCode/?value=' + value,
+                }).done(function (data) {
+                    $("#address").val(data.addressLine);
+                    $("#stateProvince").val(data.stateProvince);
+                    $("#city").val(data.city);
+                    $("#district").val(data.district);
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
+

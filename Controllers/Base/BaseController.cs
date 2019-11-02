@@ -15,9 +15,9 @@ using System.Threading.Tasks;
 namespace papuff.backoffice.Controllers.Base {
     public class BaseController : Controller {
 
-        protected IEventNotifier _notify =>
-                    (IEventNotifier)HttpContext.RequestServices
-                        .GetService(typeof(IEventNotifier));
+        //protected IEventNotifier _notify =>
+        //            (IEventNotifier)HttpContext.RequestServices
+        //                .GetService(typeof(IEventNotifier));
 
         /// <summary>
         /// return user info from current context
@@ -31,27 +31,27 @@ namespace papuff.backoffice.Controllers.Base {
             User?.FindFirst(ClaimTypes.Hash)?.Value;
 
         protected async Task<T> Get<T>(string uri) {
-            var request = new DataRequest<T>(Endpoint.api, _notify);
+            var request = new DataRequest<T>(Endpoint.api);
             return await request.Get(uri, GetCurrentToken());
         }
 
         protected async Task<T> GetById<T>(string uri, string id) {
-            var request = new DataRequest<T>(Endpoint.api, _notify);
+            var request = new DataRequest<T>(Endpoint.api);
             return await request.GetById(uri, id, GetCurrentToken());
         }
 
         protected async Task<T> Post<T>(string uri, object obj) {
-            var request = new DataRequest<T>(Endpoint.api, _notify);
+            var request = new DataRequest<T>(Endpoint.api);
             return await request.Post(uri, obj, GetCurrentToken());
         }
 
         protected async Task<T> Put<T>(string uri, object obj) {
-            var request = new DataRequest<T>(Endpoint.api, _notify);
+            var request = new DataRequest<T>(Endpoint.api);
             return await request.Put(uri, obj, GetCurrentToken());
         }
 
         protected async Task PostAnonymous<T>(string uri, object obj) {
-            var request = new DataRequest<T>(Endpoint.api, _notify);
+            var request = new DataRequest<T>(Endpoint.api);
             await request.PostAnonymous(uri, obj);
         }
 

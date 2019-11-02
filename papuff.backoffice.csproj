@@ -9,6 +9,47 @@
     <Content Remove="package.json" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\assets\css\components.css" />
+    <None Include="wwwroot\assets\css\custom.css" />
+    <None Include="wwwroot\assets\css\skins\reverse.css" />
+    <None Include="wwwroot\assets\css\style.css" />
+    <None Include="wwwroot\assets\js\custom.js" />
+    <None Include="wwwroot\assets\js\page\auth-register.js" />
+    <None Include="wwwroot\assets\js\page\bootstrap-modal.js" />
+    <None Include="wwwroot\assets\js\page\components-chat-box.js" />
+    <None Include="wwwroot\assets\js\page\components-multiple-upload.js" />
+    <None Include="wwwroot\assets\js\page\components-statistic.js" />
+    <None Include="wwwroot\assets\js\page\components-table.js" />
+    <None Include="wwwroot\assets\js\page\components-user.js" />
+    <None Include="wwwroot\assets\js\page\features-post-create.js" />
+    <None Include="wwwroot\assets\js\page\features-posts.js" />
+    <None Include="wwwroot\assets\js\page\features-setting-detail.js" />
+    <None Include="wwwroot\assets\js\page\forms-advanced-forms.js" />
+    <None Include="wwwroot\assets\js\page\gmaps-advanced-route.js" />
+    <None Include="wwwroot\assets\js\page\gmaps-draggable-marker.js" />
+    <None Include="wwwroot\assets\js\page\gmaps-geocoding.js" />
+    <None Include="wwwroot\assets\js\page\gmaps-geolocation.js" />
+    <None Include="wwwroot\assets\js\page\gmaps-marker.js" />
+    <None Include="wwwroot\assets\js\page\gmaps-multiple-marker.js" />
+    <None Include="wwwroot\assets\js\page\gmaps-route.js" />
+    <None Include="wwwroot\assets\js\page\gmaps-simple.js" />
+    <None Include="wwwroot\assets\js\page\index-0.js" />
+    <None Include="wwwroot\assets\js\page\index.js" />
+    <None Include="wwwroot\assets\js\page\modules-calendar.js" />
+    <None Include="wwwroot\assets\js\page\modules-chartjs.js" />
+    <None Include="wwwroot\assets\js\page\modules-datatables.js" />
+    <None Include="wwwroot\assets\js\page\modules-ion-icons.js" />
+    <None Include="wwwroot\assets\js\page\modules-slider.js" />
+    <None Include="wwwroot\assets\js\page\modules-sparkline.js" />
+    <None Include="wwwroot\assets\js\page\modules-sweetalert.js" />
+    <None Include="wwwroot\assets\js\page\modules-toastr.js" />
+    <None Include="wwwroot\assets\js\page\modules-vector-map.js" />
+    <None Include="wwwroot\assets\js\page\utilities-contact.js" />
+    <None Include="wwwroot\assets\js\scripts.js" />
+    <None Include="wwwroot\assets\js\stisla.js" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
