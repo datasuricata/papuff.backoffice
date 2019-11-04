@@ -56,15 +56,22 @@ namespace papuff.backoffice.Controllers {
             return await SingOut();
         }
 
-        public async Task<IActionResult> Register() {
+        public IActionResult Register() {
             return View();
         }
 
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Register(RegisterRequest request) {
-            var teste = request;
-            return RedirectToAction(nameof(Register));
+
+            if(ModelState.IsValid){
+                await Post<dynamic>("user/single", request);
+
+                Notify(Models.MessageType.Success,
+                    "Bem vindo marujo, confirme seu e-mail se não quiser fugir da prancha");
+            }
+
+            return RedirectToAction(nameof(Login));
         }
 
         private async Task<IActionResult> SingOut() {
@@ -74,12 +81,8 @@ namespace papuff.backoffice.Controllers {
         }
 
         public async Task<IActionResult> PostalCode(string value) {
-            return await FinPostalCode(value);
-        }
 
-        private async Task<IActionResult> FinPostalCode(string value) {
-
-            UriBuilder uri = new UriBuilder("https://viacep.com.br/") {
+            var uri = new UriBuilder("https://viacep.com.br/") {
                 Path = $"ws/{value}/json",
             };
 

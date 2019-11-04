@@ -72,7 +72,7 @@ namespace papuff.backoffice.Controllers.Base {
         /// </summary>
         /// <param name="msg">Write your message</param>
         /// <param name="msgType">Define your message type</param>
-        protected void Notify(string msg, MessageType type) {
+        protected void Notify(MessageType type, string msg) {
             switch (type) {
                 case MessageType.Success:
                     TempData["Message"] = msg;

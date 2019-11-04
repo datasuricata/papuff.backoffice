@@ -2,7 +2,8 @@
 @using Microsoft.AspNetCore.Http.Extensions
 
 @{
-    var loggedTime = (int)(DateTime.Now - Convert.ToDateTime(User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.DateOfBirth).Value)).TotalMinutes;
+    //var loggedTime = (int)(DateTime.Now - Convert.ToDateTime(User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.DateOfBirth).Value)).TotalMinutes;
+    var loggedTime = 4;
 }
 
 <!DOCTYPE html>

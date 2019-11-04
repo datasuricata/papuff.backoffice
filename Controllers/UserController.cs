@@ -158,9 +158,9 @@ namespace papuff.backoffice.Controllers {
         }
 
         [HttpPost]
-        public async Task<IActionResult> Companies(string name, string email, string cnpj, string registration, string tell, DateTime date, string siteUri) {
+        public async Task<IActionResult> Companies(string name, string email, string cnpj, string registration, string tell, DateTime openingDate, string siteUri) {
             var command = new CompanyRequest {
-                CNPJ = cnpj, Email = email, Name = name, OpeningDate = date, 
+                CNPJ = cnpj, Email = email, Name = name, OpeningDate = openingDate,
                 Registration = registration, SiteUri = siteUri, Tell = tell
             };
 

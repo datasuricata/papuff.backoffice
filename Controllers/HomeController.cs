@@ -4,7 +4,7 @@ using papuff.backoffice.Controllers.Base;
 
 namespace papuff.backoffice.Controllers {
 
-    [Authorize]
+  //  [Authorize]
     public class HomeController : BaseController
     {
         public IActionResult Index()
@@ -12,8 +12,8 @@ namespace papuff.backoffice.Controllers {
             return View();
         }
 
-        public IActionResult Privacy()
-        {
+        [AllowAnonymous] //todo remove this after create
+        public IActionResult FirstSteps(){
             return View();
         }
     }
