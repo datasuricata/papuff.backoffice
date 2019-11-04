@@ -13,6 +13,10 @@ namespace papuff.backoffice.Models.Helpers {
         /// <param name="value"></param>
         /// <returns></returns>
         public static string EnumDisplay(this Enum value) {
+
+            if (value is null)
+                return string.Empty;
+
             return !(value.GetType().GetField(value.ToString()).GetCustomAttributes(typeof(DisplayAttribute), false)
                 .SingleOrDefault() is DisplayAttribute attribute) ? value.ToString() : attribute.Description;
         }

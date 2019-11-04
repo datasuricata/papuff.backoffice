@@ -13,7 +13,6 @@ namespace papuff.backoffice.Services.Requests {
         public StorageRequest(string baseUri) : base(baseUri) {
 
         }
-
         /// <summary>
         /// UploadFile
         /// </summary>

@@ -6,6 +6,7 @@
 @{
     ViewData["Title"] = "Dados Gerais";
     ViewBag.General = "active";
+    bool HasModel = Model != null;
 }
 
 <div class="section-header">
@@ -50,13 +51,15 @@
                             <div class="author-box-name">
                                 <a href="#">@User.Identity.Name</a>
                             </div>
-                            <div class="author-box-job">Etapa de Cadastro: <b class="text-warning">@Model.Stage.EnumDisplay()</b></div>
+                            <div class="author-box-job">Etapa de Cadastro: <b class="text-warning">@Model?.Stage.EnumDisplay()</b></div>
                             <div class="author-box-description">
                                 <p>
-                                    @Html.Raw(Model.Description)
+                                    @if (HasModel) {
+                                        Html.Raw(Model?.Description);
+                                    }
                                 </p>
                             </div>
-                           
+
                         </div>
                     </div>
                 </div>
@@ -96,14 +99,16 @@
                                 </div>
                             </div>
 
-                            @if (Model.UserId == User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value) {
+                            @if (HasModel) {
+                                if (Model.UserId == User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value) {
 
-                                <div class="row">
-                                    <div class="form-group col-12">
-                                        <label>Descrição</label>
-                                        <textarea class="form-control" asp-for="Description" style="height:120px;"></textarea>
+                                    <div class="row">
+                                        <div class="form-group col-12">
+                                            <label>Descrição</label>
+                                            <textarea class="form-control" asp-for="Description" style="height:120px;"></textarea>
+                                        </div>
                                     </div>
-                                </div>
+                                }
                             }
 
                         </div>

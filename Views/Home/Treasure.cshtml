@@ -1,0 +1,68 @@
+﻿@model papuff.backoffice.Models.Request.GuideRequest
+
+@{
+    ViewData["Title"] = "Primeiros Passos";
+}
+
+<div class="section-header">
+    <h1>Ajustes Iniciais</h1>
+    <div class="section-header-breadcrumb">
+        <div class="breadcrumb-item"><a asp-action="Index">Inicio</a></div>
+        <div class="breadcrumb-item active">Ajustes</div>
+    </div>
+</div>
+
+<div class="section-body">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row mt-4">
+                        <div class="col-12 col-lg-8 offset-lg-2">
+                            <div class="wizard-steps">
+                                <div class="wizard-step">
+                                    <div class="wizard-step-icon">
+                                        <i class="fas fa-crown"></i>
+                                    </div>
+                                    <div class="wizard-step-label">
+                                        Meu Reino
+                                    </div>
+                                </div>
+                                <div class="wizard-step wizard-step-active">
+                                    <div class="wizard-step-icon">
+                                        <i class="fas fa-gem"></i>
+                                    </div>
+                                    <div class="wizard-step-label">
+                                        Tesouro
+                                    </div>
+                                </div>
+                                <div class="wizard-step">
+                                    <div class="wizard-step-icon">
+                                        <i class="fas fa-theater-masks"></i>
+                                    </div>
+                                    <div class="wizard-step-label">
+                                        Atividades
+                                    </div>
+                                </div>
+                                <div class="wizard-step">
+                                    <div class="wizard-step-icon">
+                                        <i class="fas fa-street-view"></i>
+                                    </div>
+                                    <div class="wizard-step-label">
+                                        Cerco
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

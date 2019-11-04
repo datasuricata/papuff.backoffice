@@ -38,7 +38,7 @@ namespace papuff.backoffice.Controllers {
                         new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                         new Claim(ClaimTypes.Email, user.Email),
                         new Claim(ClaimTypes.Hash, user.Token),
-                        new Claim(ClaimTypes.Name, user.Name),
+                        new Claim(ClaimTypes.Name, user.Name ?? "Não Informado"),
                         new Claim(ClaimTypes.DateOfBirth, DateTime.Now.ToString()),
                         new Claim(ClaimTypes.Role, user.Type.ToString()),
                     };
@@ -67,7 +67,7 @@ namespace papuff.backoffice.Controllers {
             if(ModelState.IsValid){
                 await Post<dynamic>("user/single", request);
 
-                Notify(Models.MessageType.Success,
+                SetMessage(Models.MessageType.Success,
                     "Bem vindo marujo, confirme seu e-mail se não quiser fugir da prancha");
             }
 

@@ -23,28 +23,30 @@
         <div class="col-md-4">
             <partial name="_LayoutProfile.cshtml" />
 
-            @foreach (var card in Model.Payments) {
-                <div class="col-md-12">
-                    <div class="card author-box card-primary shadow bg-whitesmoke" id="@card.Id">
-                        <div class="card-header">
-                            <h4>@Helper.EnumDisplay(card.Type)</h4>
-                            <div class="card-header-action">
-                                <a data-dismiss="#@card.Id" class="btn btn-icon btn-danger" href="#" onclick="Delete('@card.Id');" style="border-radius: 3px !important;"><i class="fas fa-times"></i></a>
+            @if (Model != null) {
+                foreach (var card in Model.Payments) {
+                    <div class="col-md-12">
+                        <div class="card author-box card-primary shadow bg-whitesmoke" id="@card.Id">
+                            <div class="card-header">
+                                <h4>@Helper.EnumDisplay(card.Type)</h4>
+                                <div class="card-header-action">
+                                    <a data-dismiss="#@card.Id" class="btn btn-icon btn-danger" href="#" onclick="Delete('@card.Id');" style="border-radius: 3px !important;"><i class="fas fa-times"></i></a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="mb-2 text-muted">Cartão: <b class="text-warning">...@card.Card.Substring(card.Card.Length - 4)</b></div>
-                            <div class="mb-2 text-muted">
-                                Documento: <b class="text-warning">...@card.Document.Substring(card.Document.Length - 4)</b>
-                                <label class="float-right custom-switch mt-2">
-                                    <input type="checkbox" checked="@card.IsDefault" name="@card.IsDefault" class="custom-switch-input">
-                                    <span class="custom-switch-indicator"></span>
-                                    <span class="custom-switch-description text-muted">Seleção padrão</span>
-                                </label>
+                            <div class="card-body">
+                                <div class="mb-2 text-muted">Cartão: <b class="text-warning">...@card.Card.Substring(card.Card.Length - 4)</b></div>
+                                <div class="mb-2 text-muted">
+                                    Documento: <b class="text-warning">...@card.Document.Substring(card.Document.Length - 4)</b>
+                                    <label class="float-right custom-switch mt-2">
+                                        <input type="checkbox" checked="@card.IsDefault" name="@card.IsDefault" class="custom-switch-input">
+                                        <span class="custom-switch-indicator"></span>
+                                        <span class="custom-switch-description text-muted">Seleção padrão</span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                }
             }
         </div>
 

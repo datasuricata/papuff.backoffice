@@ -3,76 +3,76 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace papuff.backoffice.Services.Notifications.Events {
-    public sealed class EventNotifier : IEventNotifier {
+    //public sealed class EventNotifier : IEventNotifier {
 
-        #region - parameters -
+    //    #region - parameters -
 
-        private readonly Notifier _notifier;
-        private bool _disposed;
+    //    private readonly Notifier _notifier;
+    //    private bool _disposed;
 
-        #endregion
+    //    #endregion
 
-        #region - ctor -
+    //    #region - ctor -
 
-        public EventNotifier() => _notifier = new Notifier();
+    //    public EventNotifier() => _notifier = new Notifier();
 
-        #endregion
+    //    #endregion
 
-        #region - methods -
+    //    #region - methods -
 
-        // use for fast validations
-        public void When<N>(bool hasError, string message) {
-            if (hasError)
-                _notifier.Notifications
-                    .Add(new Notification {
-                        Key = typeof(N).Name,
-                        Value = message,
-                        StatusCode = 400
-                    });
-        }
+    //    // use for fast validations
+    //    public void When<N>(bool hasError, string message) {
+    //        if (hasError)
+    //            _notifier.Notifications
+    //                .Add(new Notification {
+    //                    Key = typeof(N).Name,
+    //                    Value = message,
+    //                    StatusCode = 400
+    //                });
+    //    }
 
-        public void Add<N>(string message) => _notifier.Notifications.Add(new Notification { Key = typeof(N).Name, Value = message, StatusCode = 400 });
+    //    public void Add<N>(string message) => _notifier.Notifications.Add(new Notification { Key = typeof(N).Name, Value = message, StatusCode = 400 });
 
-        public void AddException<N>(string message, Exception exception = null) {
+    //    public void AddException<N>(string message, Exception exception = null) {
 
-            var ex = exception?.InnerException?.InnerException == null
-                ? exception?.Message
-                : exception.InnerException.InnerException.Message;
+    //        var ex = exception?.InnerException?.InnerException == null
+    //            ? exception?.Message
+    //            : exception.InnerException.InnerException.Message;
 
-            var lines = ex != null && ex.Contains(Environment.NewLine)
-                ? ex.Split(new[] { Environment.NewLine }, StringSplitOptions.None)
-                : new[] { ex };
+    //        var lines = ex != null && ex.Contains(Environment.NewLine)
+    //            ? ex.Split(new[] { Environment.NewLine }, StringSplitOptions.None)
+    //            : new[] { ex };
 
 
-            _notifier.Notifications.Add(new Notification {
-                Key = typeof(N).Name,
-                Value = message,
-                Exception = lines,
-                StatusCode = 500,
-            });
-        }
+    //        _notifier.Notifications.Add(new Notification {
+    //            Key = typeof(N).Name,
+    //            Value = message,
+    //            Exception = lines,
+    //            StatusCode = 500,
+    //        });
+    //    }
 
-        public bool IsValid => !_notifier.HasAny;
+    //    public bool IsValid => !_notifier.HasAny;
 
-        public IEnumerable<Notification> GetNotifications() => _notifier.Notifications.AsEnumerable();
+    //    public IEnumerable<Notification> GetNotifications() => _notifier.Notifications.AsEnumerable();
 
-        #endregion
+    //    #endregion
 
-        #region - dispose -
+    //    #region - dispose -
 
-        private void Dispose(bool disposing) {
-            if (!_disposed)
-                if (disposing)
-                    _notifier.Notifications.Clear();
+    //    private void Dispose(bool disposing) {
+    //        if (!_disposed)
+    //            if (disposing)
+    //                _notifier.Notifications.Clear();
 
-            _disposed = true;
-        }
+    //        _disposed = true;
+    //    }
 
-        public void Dispose() {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+    //    public void Dispose() {
+    //        Dispose(true);
+    //        GC.SuppressFinalize(this);
+    //    }
 
-        #endregion
-    }
+    //    #endregion
+    //}
 }

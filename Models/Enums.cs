@@ -84,4 +84,9 @@ namespace papuff.backoffice.Models {
         [Display(Description = "Boleto Bancário")]
         BankSlip = 3
     }
+
+    public enum EntryType {
+        Ticket = 1,
+        OrderPad = 2,
+    }
 }

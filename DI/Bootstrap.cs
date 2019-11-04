@@ -6,7 +6,7 @@ namespace papuff.backoffice.DI {
         public static void Configure(IServiceCollection services) {
             #region - kernel -
 
-            services.AddScoped(typeof(IEventNotifier), typeof(EventNotifier));
+            //services.AddScoped(typeof(IEventNotifier), typeof(EventNotifier));
 
             #endregion
         }
