@@ -9,20 +9,15 @@ using System.Threading.Tasks;
 namespace papuff.backoffice.Services.Requests.Base {
     public class BaseRequest {
         public BaseRequest(string baseUri) {
-            this.baseUri = baseUri;
+            _base = baseUri;
         }
 
-        #region - properties -
+        protected string _base;
+        private readonly HttpClient _client = new HttpClient();
 
-        protected string baseUri;
-        private HttpClient Client = new HttpClient();
-
-        #endregion
-
-        #region - send async -
         protected async Task<HttpResponseMessage> SendAsync(RequestMethod typerequest, string requestUri, object parametros = null, string token = "") {
-            Client.BaseAddress = new Uri(baseUri);
-            Client.Timeout = TimeSpan.FromMinutes(30);
+            _client.BaseAddress = new Uri(_base);
+            _client.Timeout = TimeSpan.FromMinutes(30);
 
             switch (typerequest) {
                 case RequestMethod.Get: {
@@ -46,49 +41,42 @@ namespace papuff.backoffice.Services.Requests.Base {
             }
             return null;
         }
-        #endregion
 
-        #region - get -
         private async Task<HttpResponseMessage> Get(string requestUri, string token = "") {
-            using (Client) {
-                Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            using (_client) {
+                _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 if (!string.IsNullOrEmpty(token))
-                    Client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+                    _client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
 
-                return await Client.GetAsync(requestUri);
+                return await _client.GetAsync(requestUri);
             }
         }
-        #endregion
 
-        #region - post -
         private async Task<HttpResponseMessage> Post(string requestUri, object parameters, string token = "") {
-            using (Client) {
-                Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            using (_client) {
+                _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 if (!string.IsNullOrEmpty(token))
-                    Client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+                    _client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
 
                 var json = JsonConvert.SerializeObject(parameters);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                return await Client.PostAsync(requestUri, content);
+                return await _client.PostAsync(requestUri, content);
             }
         }
-        #endregion
-
-        #region - put -
+        
         private async Task<HttpResponseMessage> Put(string requestUri, object parameters, string token = "") {
-            using (Client) {
+            using (_client) {
                 if (!string.IsNullOrEmpty(token))
-                    Client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+                    _client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
 
                 var json = JsonConvert.SerializeObject(parameters);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                return await Client.PutAsync(requestUri, content);
+                return await _client.PutAsync(requestUri, content);
             }
         }
-        #endregion
     }
 }

@@ -118,7 +118,7 @@ namespace papuff.backoffice.Controllers {
             var vm = await Get<WalletResponse>("wallet/me");
 
             if (vm is null) {
-                await Get<BaseResponse>($"wallet/single/{LoggedLess}");
+                await Get<BaseResponse>($"wallet/single/{Me}");
                 return RedirectToAction(nameof(Wallet));
             }
 

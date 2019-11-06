@@ -1,10 +1,8 @@
-﻿using papuff.backoffice.Services.Notifications;
-
-namespace papuff.backoffice.Models.Request {
+﻿namespace papuff.backoffice.Models.Request {
     public class GuideRequest {
+        // owner
         public string Name { get; set; }
         public string Email { get; set; }
-        public string CNPJ { get; set; }
         public EntryType Type { get; set; }
 
         // receipt
@@ -12,5 +10,21 @@ namespace papuff.backoffice.Models.Request {
         public string Account { get; set; }
         public string CPF { get; set; }
         public int DateDue { get; set; }
+
+        // company
+        public string Registration { get; set; }
+        public string SiteUri { get; set; }
+        public string CNPJ { get; set; }
+
+        // todo siege
+        public VisibilityType Visibility { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string ImageUri { get; set; }
+        public double Range { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+        public int OperationIn { get; set; }
+        public int OperationTime { get; set; }
     }
 }

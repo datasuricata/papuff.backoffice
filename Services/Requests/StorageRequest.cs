@@ -48,7 +48,7 @@ namespace papuff.backoffice.Services.Requests {
 
                 using (var client = new HttpClient()) {
 
-                    client.BaseAddress = new Uri(baseUri);
+                    client.BaseAddress = new Uri(_base);
                     client.Timeout = TimeSpan.FromMinutes(30);
                     client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
 

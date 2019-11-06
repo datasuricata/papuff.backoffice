@@ -89,4 +89,12 @@ namespace papuff.backoffice.Models {
         Ticket = 1,
         OrderPad = 2,
     }
+
+    public enum VisibilityType {
+        [Display(Description = "Publico")]
+        Public = 0,
+
+        [Display(Description = "Privado")]
+        Private = 1,
+    }
 }

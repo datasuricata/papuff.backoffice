@@ -1,0 +1,206 @@
+﻿@model papuff.backoffice.Models.Request.GuideRequest
+
+@{
+    ViewData["Title"] = "Primeiros Passos";
+}
+
+<div class="section-header">
+    <h1>Ajustes Iniciais</h1>
+    <div class="section-header-breadcrumb">
+        <div class="breadcrumb-item"><a asp-action="Index">Inicio</a></div>
+        <div class="breadcrumb-item active">Ajustes</div>
+    </div>
+</div>
+
+<div class="section-body">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row mt-4">
+                        <div class="col-12 col-lg-8 offset-lg-2">
+                            <ul class="nav nav-pills wizard-steps" role="tablist">
+                                <li class="nav-item wizard-step" style="padding:0px;">
+                                    <a class="nav-link active show" id="kingdom" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true" style="padding: 30px;">
+                                        <div class="wizard-step-icon">
+                                            <i class="fas fa-crown" style="font-size: 34px; margin-bottom: 15px;"></i>
+                                        </div>
+                                        <div class="wizard-step-label">
+                                            Meu Reino
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="nav-item wizard-step" style="padding:0px;">
+                                    <a class="nav-link" id="treasure" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false" style="padding: 30px;">
+                                        <div class="wizard-step-icon">
+                                            <i class="fas fa-dungeon" style="font-size: 34px; margin-bottom: 15px;"></i>
+                                        </div>
+                                        <div class="wizard-step-label">
+                                            Tesouro
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="nav-item wizard-step" style="padding:0px;">
+                                    <a class=" nav-link" id="activities" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false" style="padding: 30px;">
+                                        <div class="wizard-step-icon">
+                                            <i class="fas fa-theater-masks" style="font-size: 34px; margin-bottom: 15px;"></i>
+                                        </div>
+                                        <div class="wizard-step-label">
+                                            Atividades
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="nav-item wizard-step" style="padding:0px;">
+                                    <a class=" nav-link" id="siege" data-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="false" style="padding: 30px;">
+                                        <div class="wizard-step-icon">
+                                            <i class="fas fa-street-view" style="font-size: 34px; margin-bottom: 15px;"></i>
+                                        </div>
+                                        <div class="wizard-step-label">
+                                            Cerco
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <form class="needs-validation" asp-action="InitialStep" id="setting-form" asp-controller="Home" asp-anti-forgery novalidate="" data-ajax="true" data-ajax-method="POST" data-ajax-failure="FormOnFail" data-ajax-success="window.location = '/Home/Treasure'">
+                        <div class="tab-content">
+                            <div class="tab-pane fade active show" id="tab1" role="tabpanel" aria-labelledby="kingdom">
+                                <div class="wizard-content mt-2">
+                                    <div class="wizard-pane">
+                                        <div class="form-group row align-items-center">
+                                            <label class="col-md-4 text-md-right text-left">Como se chama o reino?</label>
+                                            <div class="col-lg-4 col-md-6">
+                                                <input type="text" placeholder="Mega Costela" required asp-for="Name" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <label class="col-md-4 text-md-right text-left">Quem é o responsável pelas cartas?</label>
+                                            <div class="col-lg-4 col-md-6">
+                                                <input type="email" placeholder="julius.o.carteiro@megacostela.br" required asp-for="Email" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <label class="col-md-4 text-md-right text-left">Informe o CNPJ?</label>
+                                            <div class="col-lg-4 col-md-6">
+                                                <input type="text" placeholder="86328400000146" required asp-for="CNPJ" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <label class="col-md-4 text-md-right text-left">Informe a Inscrição Estadual?</label>
+                                            <div class="col-lg-4 col-md-6">
+                                                <input type="text" placeholder="8037162184" required asp-for="Registration" class="form-control">
+                                            </div>
+                                        </div>
+                                        @*<div class="form-group row">
+                                                <div class="col-md-4"></div>
+                                                <div class="col-lg-4 col-md-6 text-right">
+                                                    <button type="submit" class="btn btn-icon icon-right btn-primary">Avançar <i class="fas fa-hand-point-right"></i></button>
+                                                </div>
+                                            </div>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="treasure">
+                                <div class="wizard-content">
+                                    <div class="wizard-pane">
+                                        <div class="form-group row align-items-center">
+                                            <label class="col-md-4 text-md-right text-left">Informe a conta para guardar o ouro?</label>
+                                            <div class="col-lg-4 col-md-6">
+                                                <input type="text" required placeholder="1263" asp-for="Agency" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <label class="col-md-4 text-md-right text-left">Agencia</label>
+                                            <div class="col-lg-4 col-md-6">
+                                                <input type="text" required placeholder="1110293-P" asp-for="Account" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <label class="col-md-4 text-md-right text-left">CPF</label>
+                                            <div class="col-lg-4 col-md-6">
+                                                <input type="text" required placeholder="09709382098" asp-for="CPF" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-4 text-md-right text-left mt-2">Agora é só escolher o dia de recebimento</label>
+                                            <div class="col-lg-4 col-md-6">
+                                                <select class="form-control" asp-for="DateDue">
+                                                    <option>Selecione</option>
+                                                    <option>5</option>
+                                                    <option>10</option>
+                                                    <option>15</option>
+                                                    <option>20</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="activities">
+                                <div class="wizard-content">
+                                    <div class="wizard-pane">
+                                        <div class="form-group row align-items-center">
+                                            <label class="col-md-4 text-md-right text-left">Qual tipo de serviço vamos oferecer?</label>
+                                            <div class="col-lg-4 col-md-6">
+                                                <select class="form-control">
+                                                    <option>Selecione</option>
+                                                    <option value="1">Academia</option>
+                                                    <option value="2">Bar</option>
+                                                    <option value="3">Bazar</option>
+                                                    <option value="4">Casa Noturna</option>
+                                                    <option value="5">Casa de Eventos</option>
+                                                    <option value="6">Centro Comercial</option>
+                                                    <option value="7">Escritorio</option>
+                                                    <option value="8">Lojas de departamento‎</option>
+                                                    <option value="9">Padarias</option>
+                                                    <option value="10">Pub</option>
+                                                    <option value="11">Restaurante</option>
+                                                    <option value="12">Salão de Beleza</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-4 text-md-right text-left mt-2">Como vão entrar no reino?</label>
+                                            <div class="col-lg-4 col-md-6">
+                                                <div class="selectgroup w-100">
+                                                    <label class="selectgroup-item">
+                                                        <input type="radio" asp-for="Type" value="@EntryType.Ticket" class="selectgroup-input">
+                                                        <span class="selectgroup-button">Ingresso</span>
+                                                    </label>
+                                                    <label class="selectgroup-item">
+                                                        <input type="radio" asp-for="Type" value="@EntryType.OrderPad" class="selectgroup-input">
+                                                        <span class="selectgroup-button">Comanda</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <label class="col-md-4 text-md-right text-left">Já temos um site?</label>
+                                            <div class="col-lg-4 col-md-6">
+                                                <input type="text" placeholder="www.papuff.com.br" required asp-for="SiteUri" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab4" role="tabpanel" aria-labelledby="siege">
+                                <div class="wizard-content">
+                                    <div class="wizard-pane">
+                                        <div class="form-group row align-items-center">
+                                            <label class="col-md-4 text-md-right text-left">TODO SIEGE</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

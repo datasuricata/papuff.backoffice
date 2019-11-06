@@ -2,52 +2,45 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using papuff.backoffice.Models;
 using papuff.backoffice.Models.Helpers;
-using papuff.backoffice.Services.Notifications.Events;
 using papuff.backoffice.Services.Requests;
 using papuff.backoffice.Services.Requests.Endpoints.Base;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace papuff.backoffice.Controllers.Base {
     public class BaseController : Controller {
 
-        //protected IEventNotifier _notify =>
-        //            (IEventNotifier)HttpContext.RequestServices
-        //                .GetService(typeof(IEventNotifier));
-
         /// <summary>
         /// return user info from current context
         /// </summary>
         /// <returns></returns>
-        protected string LoggedLess => User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        protected string Me => User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
         #region - async -
 
-        private string GetCurrentToken() =>
+        private string SessionToken =>
             User?.FindFirst(ClaimTypes.Hash)?.Value;
 
         protected async Task<T> Get<T>(string uri) {
             var request = new DataRequest<T>(Endpoint.api);
-            return await request.Get(uri, GetCurrentToken());
+            return await request.Get(uri, SessionToken);
         }
 
         protected async Task<T> GetById<T>(string uri, string id) {
             var request = new DataRequest<T>(Endpoint.api);
-            return await request.GetById(uri, id, GetCurrentToken());
+            return await request.GetById(uri, id, SessionToken);
         }
 
         protected async Task<T> Post<T>(string uri, object obj) {
             var request = new DataRequest<T>(Endpoint.api);
-            return await request.Post(uri, obj, GetCurrentToken());
+            return await request.Post(uri, obj, SessionToken);
         }
 
         protected async Task<T> Put<T>(string uri, object obj) {
             var request = new DataRequest<T>(Endpoint.api);
-            return await request.Put(uri, obj, GetCurrentToken());
+            return await request.Put(uri, obj, SessionToken);
         }
 
         protected async Task PostAnonymous<T>(string uri, object obj) {

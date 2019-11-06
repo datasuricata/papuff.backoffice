@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using papuff.backoffice.Models;
 using papuff.backoffice.Services.Notifications;
-using papuff.backoffice.Services.Notifications.Events;
 using papuff.backoffice.Services.Requests.Base;
 using System;
 using System.Collections.Generic;
@@ -28,6 +27,10 @@ namespace papuff.backoffice.Services.Requests {
                 if (response.StatusCode == HttpStatusCode.BadRequest)
                     if (errors.Any())
                         throw new Exception(string.Join("#", errors.Select(x => x.Value).ToArray()));
+
+                if (response.StatusCode == HttpStatusCode.InternalServerError)
+                    if (errors.Any())
+                        throw new Exception("");
             }
         }
 

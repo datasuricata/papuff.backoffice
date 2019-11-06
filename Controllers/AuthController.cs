@@ -93,6 +93,10 @@ namespace papuff.backoffice.Controllers {
                     var obj = await response.Content.ReadAsStringAsync();
                     var result = JsonConvert.DeserializeObject<dynamic>(obj);
 
+                    // todo
+                    //stateId = estadoRepository.GetByName(result.uf)?.Id;
+                    //cityId = cidadeRepository.GetByName(result.localidade)?.Id;
+
                     return new JsonResult(new AddressRequest {
                         PostalCode = result.cep,
                         AddressLine = result.logradouro,
@@ -101,8 +105,7 @@ namespace papuff.backoffice.Controllers {
                         StateProvince = result.uf,
                     });
 
-                    //dto.EstadoId = estadoRepository.GetByName(result.uf)?.Id;
-                    //dto.CidadeId = cidadeRepository.GetByName(result.localidade)?.Id;
+                    
                 }
                 else
                     throw new Exception("Código postal não localizado, tente novamente.");
