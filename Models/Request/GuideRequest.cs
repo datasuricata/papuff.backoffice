@@ -22,8 +22,6 @@
         public string Description { get; set; }
         public string ImageUri { get; set; }
         public double Range { get; set; }
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
         public int OperationIn { get; set; }
         public int OperationTime { get; set; }
     }
