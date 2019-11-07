@@ -1,4 +1,6 @@
-﻿namespace papuff.backoffice.Models.Request {
+﻿using System;
+
+namespace papuff.backoffice.Models.Request {
     public class GuideRequest {
         // owner
         public string Name { get; set; }
@@ -22,7 +24,7 @@
         public string Description { get; set; }
         public string ImageUri { get; set; }
         public double Range { get; set; }
-        public int OperationIn { get; set; }
-        public int OperationTime { get; set; }
+        public TimeSpan OperationIn { get; set; }
+        public TimeSpan OperationTime { get; set; }
     }
 }

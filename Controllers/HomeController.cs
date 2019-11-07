@@ -19,7 +19,7 @@ namespace papuff.backoffice.Controllers {
         [HttpPost]
         public async Task<IActionResult> InitialStep(GuideRequest form) {
             if (ModelState.IsValid) {
-                await Post<dynamic>("", form);
+                await Post<dynamic>("guide/create", form);
                 return RedirectToAction(nameof(Index), form);
             }
 

@@ -30,7 +30,7 @@ namespace papuff.backoffice.Services.Requests {
 
                 if (response.StatusCode == HttpStatusCode.InternalServerError)
                     if (errors.Any())
-                        throw new Exception("");
+                        throw new Exception("Ops o servidor não pode completar a chamada, contate o suporte.");
             }
         }
 

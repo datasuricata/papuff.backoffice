@@ -63,7 +63,7 @@
                             </ul>
                         </div>
                     </div>
-                    <form class="needs-validation" asp-action="InitialStep" id="setting-form" asp-controller="Home" asp-anti-forgery novalidate="" data-ajax="true" data-ajax-method="POST" data-ajax-failure="FormOnFail" data-ajax-success="window.location = '/Home/Treasure'">
+                    <form class="needs-validation" asp-action="InitialStep" id="setting-form" asp-controller="Home" asp-anti-forgery novalidate="" data-ajax="true" data-ajax-method="POST" data-ajax-failure="FormOnFail" data-ajax-success="window.location = '/Home/Index'">
                         <div class="tab-content">
                             <div class="tab-pane fade active show" id="tab1" role="tabpanel" aria-labelledby="kingdom">
                                 <div class="wizard-content mt-2">
@@ -92,12 +92,6 @@
                                                 <input type="text" placeholder="8037162184" required asp-for="Registration" class="form-control">
                                             </div>
                                         </div>
-                                        <!-- <div class="form-group row">
-                                                <div class="col-md-4"></div>
-                                                <div class="col-lg-4 col-md-6 text-right">
-                                                    <button type="submit" class="btn btn-icon icon-right btn-primary">Avançar <i class="fas fa-hand-point-right"></i></button>
-                                                </div>
-                                            </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -188,46 +182,57 @@
                                 <div class="wizard-content">
                                     <div class="wizard-pane">
                                         <div class="form-group row align-items-center">
-                                            <label class="col-md-4 text-md-right text-left">Visibilidade do reino virtual</label>
+                                            <label class="col-md-4 text-md-right text-left">Visibilidade virtual</label>
                                             <div class="col-lg-4 col-md-6">
                                                 <div class="selectgroup w-100">
                                                     <label class="selectgroup-item">
                                                         <input type="radio" asp-for="Visibility" value="@VisibilityType.Private" class="selectgroup-input">
-                                                        <span class="selectgroup-button">Privado</span>
+                                                        <span class="selectgroup-button">Somente Convidados</span>
                                                     </label>
                                                     <label class="selectgroup-item">
                                                         <input type="radio" asp-for="Visibility" value="@VisibilityType.Public" class="selectgroup-input">
-                                                        <span class="selectgroup-button">Publico</span>
+                                                        <span class="selectgroup-button">Aberto ao Público</span>
                                                     </label>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <label class="col-md-4 text-md-right text-left">Hora de inicio & Tempo de execução</label>
+                                            <div class="input-group col-lg-4 col-md-6">
+                                                <input type="time" required asp-for="OperationIn" class="form-control">
+                                                <input type="time" required asp-for="OperationTime" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <label class="col-md-4 text-md-right text-left">Perimetro (M²)</label>
+                                            <div class="col-lg-4 col-md-6">
+                                                <input type="number" required asp-for="Range" class="form-control" min="10" max="1000" maxlength="4" step="1.00">
                                             </div>
                                         </div>
                                         <div class="form-group row align-items-center">
                                             <label class="col-md-4 text-md-right text-left">Como quer ser conhecido</label>
                                             <div class="col-lg-4 col-md-6">
-                                                <input type="text" placeholder="Reino do Pastel" required asp-for="Title" class="form-control">
+                                                <input type="text" placeholder="Mega Costela" required asp-for="Title" class="form-control">
                                             </div>
                                         </div>
-
-                                        <div class="form-group row align-items-center">
-                                            <label class="col-md-4 text-md-right text-left">
-                                                <div class="col-lg col-md-6">
-                                                    <input type="file" asp-for="Range" data-size="150">
-                                                </div>
-                                            </label>
-                                            <div class="col-lg-4 col-md-6">
-                                                <input type="text" placeholder="Reino do Pastel" required asp-for="Title" class="form-control">
-                                            </div>
-                                        </div>
-
                                         <div class="form-group row align-items-center">
                                             <label class="col-md-4 text-md-right text-left">Descrição</label>
                                             <div class="col-lg-4 col-md-6">
                                                 <textarea class="form-control" asp-for="Description" placeholder="..." data-height="150" style="height: 150px;"></textarea>
                                             </div>
                                         </div>
-                                                <!-- public string Title { get; set; }
-        public string Description { get; set; } -->
+                                        @*<div class="form-group row align-items-center">
+                                            <label class="col-md-4 text-md-right text-left">Selecione o banner</label>
+                                            <div class="col-lg col-md-6">
+                                                <input type="file" asp-for="ImageUri" data-size="150">
+                                            </div>
+                                        </div>*@
+                                        <div class="form-group row">
+                                            <div class="col-md-4"></div>
+                                            <div class="col-lg-4 col-md-6 text-right">
+                                                <button type="submit" class="btn btn-icon icon-right btn-info">Salvar <i class="fas fa-hand-point-right"></i></button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
